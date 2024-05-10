@@ -98,7 +98,7 @@
         }
 
         function fetchData() {
-            fetch('https://kimminhyeok.com/chart.html')
+            fetch('http://localhost:3000/data')
             .then(response => response.json())
             .then(data => {
                 updateData(data.totalData); // 서버로부터 받은 데이터로 그래프를 업데이트
