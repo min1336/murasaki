@@ -71,19 +71,18 @@
         }
 
         function sendData(inputData, operation) {
-            if (!isNaN(inputData)) {
-                localStorage.setItem('operation', operation);
-                localStorage.setItem('inputData', inputData);
-                localStorage.setItem('timestamp', new Date().getTime()); // 갱신을 위한 타임스탬프 추가
-
-                // 이미 열려 있는 창을 재활용하거나 새로 엽니다.
-                if (!chartWindow || chartWindow.closed) {
-                    chartWindow = window.open('chart.html', 'chartWindow');
-                } else {
-                    chartWindow.focus(); // 창이 이미 열려 있으면 포커스
-                }
-            }
+            fetch('http://localhost:3000/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ inputData, operation })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Data updated:', data))
+            .catch(error => console.error('Error:', error));
         }
+
     </script>
 </body>
 </html>

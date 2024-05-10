@@ -116,6 +116,18 @@
         function adjustYAxisMax(totalData) {
             myChart.options.scales.y.max = Math.max(100, Math.ceil(Math.abs(totalData) * 1.2));
         }
+        function fetchData() {
+            fetch('http://localhost:3000/data')
+            .then(response => response.json())
+            .then(data => {
+                updateData(data.totalData); // 함수를 수정하여 서버로부터 받은 데이터로 그래프를 업데이트
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+// 페이지 로드 시 데이터 가져오기
+window.onload = fetchData;
+
     </script>
 </body>
 </html>
