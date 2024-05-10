@@ -16,10 +16,10 @@
             text-align: center;
         }
         input[type="text"], button {
-            width: 90%; /* 모바일 기기에 적합한 폭 */
+            width: 90%;
             padding: 10px;
-            margin: 10px 5%; /* 중앙 정렬을 위해 양쪽 여백 설정 */
-            box-sizing: border-box; /* 패딩을 너비에 포함 */
+            margin: 10px 5%;
+            box-sizing: border-box;
         }
         button {
             background-color: #5cb85c;
@@ -31,33 +31,24 @@
             background-color: #45a045;
         }
         canvas {
-            display: block; /* 블록 레벨 요소로 만들어 너비 100% 적용 가능 */
+            display: block;
             width: 100%;
-            max-width: 600px; /* 최대 너비 설정 */
-            margin: 20px auto; /* 상하 20px, 좌우 자동으로 중앙 정렬 */
+            max-width: 600px;
+            height: auto;
+            margin: 20px auto;
             background-color: white;
             border: 1px solid #ccc;
         }
-    
-        /* 데스크탑과 더 큰 디스플레이를 위한 스타일 */
-        @media (min-width: 768px) {
-            input[type="text"], button {
-                width: 50%; /* 데스크탑에 적합한 폭 */
-                margin: 10px 25%; /* 중앙 정렬 */
-            }
-        }
     </style>
-    
 </head>
 <body>
     <h1>숫자 입력</h1>
     <input type="text" id="dataInput" placeholder="숫자를 입력하세요">
     <button onclick="addData()">더하기</button>
     <button onclick="subtractData()">빼기</button>
+    <button onclick="openChart()">그래프 보기</button>
 
     <script>
-        let chartWindow = window.open('', 'chartWindow'); // 창 참조 가져오기, 없으면 null 반환
-
         function addData() {
             const inputData = parseInt(document.getElementById('dataInput').value);
             const operation = 'add';
@@ -83,6 +74,9 @@
             .catch(error => console.error('Error:', error));
         }
 
+        function openChart() {
+            window.open('chart.html', 'chartWindow', 'width=600,height=400');
+        }
     </script>
 </body>
 </html>
