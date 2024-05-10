@@ -48,15 +48,14 @@
             }
         }
     </style>
-    
 </head>
 <body>
     <h1>그래프</h1>
     <canvas id="myChart"></canvas>
 
     <script>
-        let totalData = 0;
         const ctx = document.getElementById('myChart').getContext('2d');
+        let totalData = 0;
         let myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -87,47 +86,31 @@
             }
         });
 
-        window.addEventListener('storage', function(event) {
-            if (event.key === 'timestamp') { // timestamp로 변경 감지
-                updateChart();
-            }
-        });
-
-        function updateChart() {
-            const operation = localStorage.getItem('operation');
-            const inputData = parseInt(localStorage.getItem('inputData'));
-            updateData(operation, inputData);
-        }
-
-        function updateData(operation, inputData) {
-            if (!isNaN(inputData)) {
-                if (operation === 'add') {
-                    totalData += inputData;
-                } else if (operation === 'subtract') {
-                    totalData -= inputData;
-                    totalData = Math.max(0, totalData);
-                }
-                adjustYAxisMax(totalData);
-                myChart.data.datasets[0].data = [totalData];
-                myChart.update();
-            }
+        function updateData(inputData) {
+            totalData = inputData;
+            adjustYAxisMax(totalData);
+            myChart.data.datasets[0].data = [totalData];
+            myChart.update();
         }
 
         function adjustYAxisMax(totalData) {
             myChart.options.scales.y.max = Math.max(100, Math.ceil(Math.abs(totalData) * 1.2));
         }
+
         function fetchData() {
             fetch('http://localhost:3000/data')
             .then(response => response.json())
             .then(data => {
-                updateData(data.totalData); // 함수를 수정하여 서버로부터 받은 데이터로 그래프를 업데이트
+                updateData(data.totalData); // 서버로부터 받은 데이터로 그래프를 업데이트
             })
             .catch(error => console.error('Error:', error));
         }
 
-// 페이지 로드 시 데이터 가져오기
-window.onload = fetchData;
+        // 페이지 로드 시 데이터 가져오기
+        fetchData();
 
+        // 5초마다 데이터 갱신
+        setInterval(fetchData, 5000);
     </script>
 </body>
 </html>
