@@ -97,8 +97,22 @@
         }
 
         function adjustYAxisMax(totalData) {
-            myChart.options.scales.y.max = Math.max(100, Math.ceil(Math.abs(totalData) * 1.2));
-        }
+    // 데이터가 500만에 근접하면 최대값을 1000만으로 설정
+            if (totalData >= 5000000) {
+                    myChart.options.scales.y.max = 10000000; // 최대값을 천만으로 설정
+                } else {
+                    myChart.options.scales.y.max = 5000000; // 최대값을 5백만으로 설정
+                }
+
+                // y축 눈금 간격 조정
+                myChart.options.scales.y.ticks.stepSize = (myChart.options.scales.y.max === 10000000) ? 1000000 : 500000;
+
+                // 눈금 표시 형식을 숫자로만 변경
+                myChart.options.scales.y.ticks.callback = function(value) {
+                    return value; // 숫자만 표시
+                };
+            }
+
 
         function fetchData() {
             fetch('http://localhost:3000/data')
