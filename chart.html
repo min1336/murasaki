@@ -71,18 +71,15 @@
             options: {
                 scales: {
                     y: {
-                        ticks: {
-                            beginAtZero: false,
-                            max: 10000000, // 초기 최대값 설정 (10,000,000)
-                            stepSize: 1000000, // 초기 눈금 간격 설정 (1,000,000)
-                            callback: function (value, index, values) {
-                                // 눈금 표시 형식 설정
-                                if (value < 10000000) {
-                                    return (value / 1000000) + '백만';
-                                } else {
-                                    return (value / 1000000) + '천만'; // 10,000,000 이상부터는 천만으로 변경
-                                }
-                            }
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
                         }
                     }
                 }
@@ -97,21 +94,21 @@
         }
 
         function adjustYAxisMax(totalData) {
-    // 데이터가 500만에 근접하면 최대값을 1000만으로 설정
+            // 데이터가 500만에 근접하면 최대값을 1000만으로 설정
             if (totalData >= 5000000) {
-                    myChart.options.scales.y.max = 10000000; // 최대값을 천만으로 설정
-                } else {
-                    myChart.options.scales.y.max = 5000000; // 최대값을 5백만으로 설정
-                }
-
-                // y축 눈금 간격 조정
-                myChart.options.scales.y.ticks.stepSize = (myChart.options.scales.y.max === 10000000) ? 1000000 : 500000;
-
-                // 눈금 표시 형식을 숫자로만 변경
-                myChart.options.scales.y.ticks.callback = function(value) {
-                    return value; // 숫자만 표시
-                };
+                myChart.options.scales.y.max = 10000000; // 최대값을 천만으로 설정
+            } else {
+                myChart.options.scales.y.max = 5000000; // 최대값을 5백만으로 설정
             }
+
+            // y축 눈금 간격 조정
+            myChart.options.scales.y.ticks.stepSize = (myChart.options.scales.y.max === 10000000) ? 1000000 : 500000;
+
+            // 눈금 표시 형식을 숫자로만 변경
+            myChart.options.scales.y.ticks.callback = function(value) {
+                return value; // 숫자만 표시
+            };
+        }
 
 
         function fetchData() {
