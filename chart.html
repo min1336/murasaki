@@ -71,15 +71,13 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            display: false
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
+                        ticks: {
+                            beginAtZero: false,
+                            max: 5000000, // 축의 최대값 설정
+                            stepSize: 1000000, // 눈금 간격 설정
+                            callback: function (value, index, values) {
+                                return (value / 1000000) + '백만'; // 눈금 표시 형식 설정
+                            }
                         }
                     }
                 }
