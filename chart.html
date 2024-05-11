@@ -94,22 +94,26 @@
         }
 
         function adjustYAxisMax(totalData) {
-            // 데이터가 500만에 근접하면 최대값을 1000만으로 설정
-            if (totalData >= 5000000) {
-                myChart.options.scales.y.max = 10000000; // 최대값을 천만으로 설정
+            if (totalData < 100000) {
+                myChart.options.scales.y.max = 100000;  // 최대값을 10만으로 설정
+                myChart.options.scales.y.ticks.stepSize = 10000;  // 눈금 간격을 1만으로 설정
+            } else if (totalData < 500000) {
+                myChart.options.scales.y.max = 500000;  // 최대값을 50만으로 설정
+                myChart.options.scales.y.ticks.stepSize = 50000;  // 눈금 간격을 5만으로 설정
+            } else if (totalData < 1000000) {
+                myChart.options.scales.y.max = 1000000;  // 최대값을 100만으로 설정
+                myChart.options.scales.y.ticks.stepSize = 100000;  // 눈금 간격을 10만으로 설정
+            } else if (totalData < 3000000) {
+                myChart.options.scales.y.max = 3000000;  // 최대값을 300만으로 설정
+                myChart.options.scales.y.ticks.stepSize = 300000;  // 눈금 간격을 30만으로 설정
+            } else if (totalData < 5000000) {
+                myChart.options.scales.y.max = 5000000;  // 최대값을 500만으로 설정
+                myChart.options.scales.y.ticks.stepSize = 500000;  // 눈금 간격을 50만으로 설정
             } else {
-                myChart.options.scales.y.max = 5000000; // 최대값을 5백만으로 설정
+                myChart.options.scales.y.max = 10000000;  // 최대값을 1000만으로 설정
+                myChart.options.scales.y.ticks.stepSize = 1000000;  // 눈금 간격을 100만으로 설정
             }
-
-            // y축 눈금 간격 조정
-            myChart.options.scales.y.ticks.stepSize = (myChart.options.scales.y.max === 10000000) ? 1000000 : 500000;
-
-            // 눈금 표시 형식을 숫자로만 변경
-            myChart.options.scales.y.ticks.callback = function(value) {
-                return value; // 숫자만 표시
-            };
         }
-
 
         function fetchData() {
             fetch('http://localhost:3000/data')
