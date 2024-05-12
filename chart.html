@@ -116,7 +116,7 @@
         }
 
         function fetchData() {
-            fetch('http://localhost:3000/data')
+            fetch('http://iubns.net:3000/data')
             .then(response => response.json())
             .then(data => {
                 updateData(data.totalData); // 서버로부터 받은 데이터로 그래프를 업데이트
