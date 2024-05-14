@@ -32,6 +32,7 @@
             color: '#ff0000',
             speed: 5,
             jumpPower: 10,
+            gravity: 5.2, // 중력 추가
             isJumping: false,
             jumpHeight: 0,
             canJump: true,
@@ -54,7 +55,7 @@
 
         const box = {
             x: 200,
-            y: canvas.height - 150,
+            y: canvas.height - 230,
             width: 50,
             height: 50,
             image: new Image()
@@ -62,19 +63,19 @@
         box.image.src = 'https://raw.githubusercontent.com/min1336/murasaki/main/box.png';
 
         const coin = {
-            x: box.x + box.width / 2,
-            y: box.y - 20,
+            x: -50, // 시작 시에 화면 밖에 위치
+            y: -50,
             width: 30,
             height: 30,
             image: new Image(),
-            speedY: 2,
-            opacity: 1,
-            rotation: 0
+            speedY: 2.5, // 코인이 올라가는 속도
+            opacity: 0, // 초기 투명도 설정
+            isAnimating: false, // 코인 애니메이션 중인지 여부
         };
         coin.image.src = 'https://raw.githubusercontent.com/min1336/murasaki/main/coin.png';
 
         function controlPlayer() {
-            if (player.isJumping) {
+            if (player.isJumping && !player.canJump) { // 플레이어가 점프 중이고 땅에 닿아있지 않을 때만 적용
                 player.y -= player.jumpPower;
                 player.jumpHeight += player.jumpPower;
                 if (player.jumpHeight >= 100) {
@@ -84,7 +85,8 @@
                 }
             } else {
                 if (player.y < ground.y - player.height) {
-                    player.y += player.speed;
+                    // 중력 적용하여 플레이어가 떨어지는 속도 제어
+                    player.y += player.gravity;
                 } else {
                     player.y = ground.y - player.height;
                     player.canJump = true;
@@ -93,18 +95,23 @@
         }
 
         function drawCoin() {
-            ctx.save();
-            ctx.translate(coin.x + coin.width / 2, coin.y + coin.height / 2);
-            ctx.rotate(coin.rotation);
-            ctx.globalAlpha = coin.opacity;
-            ctx.drawImage(coin.image, -coin.width / 2, -coin.height / 2, coin.width, coin.height);
-            ctx.restore();
+            if (coin.isAnimating) {
+                ctx.globalAlpha = coin.opacity;
+                ctx.drawImage(coin.image, coin.x, coin.y, coin.width, coin.height);
+                ctx.globalAlpha = 1; // 다른 요소에 영향을 주지 않기 위해 다시 투명도를 1로 설정
+            }
         }
 
+
         function moveCoin() {
-            coin.y -= coin.speedY;
-            coin.opacity -= 0.02;
-            coin.rotation += 0.1;
+            if (coin.isAnimating) {
+                coin.y -= coin.speedY;
+                coin.opacity -= 0.05; // 투명도 감소
+                if (coin.opacity <= 0) {
+                    coin.isAnimating = false; // 애니메이션 종료
+                    coin.opacity = 1; // 투명도 초기화
+                }
+            }
         }
 
         function gameLoop() {
@@ -117,24 +124,29 @@
             controlPlayer();
 
             if (checkCollision(player, box)) {
-                createCoin();
+                if (!coin.isAnimating) {
+                    createCoin();
+                    coin.isAnimating = true;
+                }
             }
-
             drawCoin();
             moveCoin();
-
-            if (checkCollision()) {
-                clearInterval(gameInterval);
-                alert('게임 오버!');
-                location.reload();
-            }
         }
 
+        let coinTimer = null;
+
         function createCoin() {
-            coin.x = box.x + box.width / 2;
-            coin.y = box.y - 20;
+            coin.x = box.x + box.width / 2 - coin.width / 2;
+            coin.y = box.y - coin.height;
             coin.opacity = 1;
-            coin.rotation = 0;
+
+            // 1초 후에 코인 사라지도록 타이머 설정
+            coinTimer = setTimeout(deleteCoin, 1000);
+        }
+
+        function deleteCoin() {
+            clearTimeout(coinTimer); // 타이머 중지
+            coin.opacity = 0; // 코인 투명도 0으로 설정
         }
 
         function checkCollision(object1, object2) {
