@@ -2,133 +2,93 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>막대 그래프 동적 업데이트</title>
+    <title>동적 애니메이션</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
+        body, html {
+            height: 100%;
             margin: 0;
-            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            background-image: url('https://raw.githubusercontent.com/min1336/murasaki/main/background2.jpg'); /* 배경 이미지 설정 */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         h1 {
             color: #333;
             text-align: center;
-        }
-        input[type="text"], button {
-            width: 90%; /* 모바일 기기에 적합한 폭 */
-            padding: 10px;
-            margin: 10px 5%; /* 중앙 정렬을 위해 양쪽 여백 설정 */
-            box-sizing: border-box; /* 패딩을 너비에 포함 */
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a045;
-        }
-        canvas {
-            display: block; /* 블록 레벨 요소로 만들어 너비 100% 적용 가능 */
+            position: absolute;
+            top: 20px;
             width: 100%;
-            max-width: 600px; /* 최대 너비 설정 */
-            margin: 20px auto; /* 상하 20px, 좌우 자동으로 중앙 정렬 */
-            background-color: white;
-            border: 1px solid #ccc;
         }
-    
-        /* 데스크탑과 더 큰 디스플레이를 위한 스타일 */
-        @media (min-width: 768px) {
-            input[type="text"], button {
-                width: 50%; /* 데스크탑에 적합한 폭 */
-                margin: 10px 25%; /* 중앙 정렬 */
-            }
+        .mario {
+            width: 7.5; /* 뷰포트의 너비에 따라 마리오 이미지 크기 조정 */
+            position: absolute;
+            bottom: 13vh; /* 뷰포트의 높이에 따라 마리오 이미지 위치 조정 */
+            left: 50%; /* 가운데 정렬 */
+            transform: translateX(-50%); /* 정확히 중앙에서 시작하도록 조정 */
+            animation-name: jump;
+            animation-duration: 0.7s;
+            animation-timing-function: ease;
+            animation-fill-mode: forwards;
+        }
+        @keyframes jump {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-15vh); } /* 뷰포트 높이에 따라 점프 높이 조정 */
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+        .coin {
+            position: absolute;
+            width: 50px; /* 코인의 크기 */
+            animation: floatUp 1.3s ease-out forwards, spin 1s infinite linear; /* 코인 상승 및 회전 애니메이션 */
+        }
+        @keyframes floatUp {
+            0% { bottom: 40vh; opacity: 1; }
+            100% { bottom: 53vh; opacity: 0; }
+        }
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
         }
     </style>
 </head>
 <body>
-    <h1>그래프</h1>
-    <canvas id="myChart"></canvas>
+    <img src="https://raw.githubusercontent.com/min1336/murasaki/main/mario_stay.png" class="mario" id="marioImage">
 
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        let totalData = 0;
-        let myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['누적 합계'],
-                datasets: [{
-                    label: '입력된 숫자 합계',
-                    data: [0],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            display: false
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
+        const mario = document.getElementById('marioImage');
+        function triggerJump() {
+            mario.src = 'https://raw.githubusercontent.com/min1336/murasaki/main/mario_jump.png'; // 점프 이미지로 변경
+            mario.style.animation = 'none';
+            mario.offsetHeight; // Trigger reflow
+            mario.style.animation = null; 
+            createCoin(); // 코인 생성 함수 호출
+            mario.addEventListener('animationend', resetImage); // 애니메이션 끝나면 이미지 리셋
+        }
+
+        function resetImage() {
+            mario.src = 'https://raw.githubusercontent.com/min1336/murasaki/main/mario_stay.png'; // 원래 이미지로 복원
+            mario.removeEventListener('animationend', resetImage); // 이벤트 리스너 제거
+        }
+
+        function createCoin() {
+            const coin = document.createElement('img');
+            coin.src = 'https://raw.githubusercontent.com/min1336/murasaki/main/coin.png';
+            coin.classList.add('coin');
+            coin.style.left = '47.8%'; // 가운데 정렬
+            document.body.appendChild(coin);
+
+            // 코인 애니메이션 후 삭제
+            coin.addEventListener('animationend', () => {
+                if (coin.style.opacity === '0') { // 애니메이션 끝에서 투명도가 0일 때 삭제
+                    coin.remove();
                 }
-            }
-        });
-
-        function updateData(inputData) {
-            totalData = inputData;
-            adjustYAxisMax(totalData);
-            myChart.data.datasets[0].data = [totalData];
-            myChart.update();
+            });
         }
 
-        function adjustYAxisMax(totalData) {
-            if (totalData < 100000) {
-                myChart.options.scales.y.max = 100000;  // 최대값을 10만으로 설정
-                myChart.options.scales.y.ticks.stepSize = 10000;  // 눈금 간격을 1만으로 설정
-            } else if (totalData < 500000) {
-                myChart.options.scales.y.max = 500000;  // 최대값을 50만으로 설정
-                myChart.options.scales.y.ticks.stepSize = 50000;  // 눈금 간격을 5만으로 설정
-            } else if (totalData < 1000000) {
-                myChart.options.scales.y.max = 1000000;  // 최대값을 100만으로 설정
-                myChart.options.scales.y.ticks.stepSize = 100000;  // 눈금 간격을 10만으로 설정
-            } else if (totalData < 3000000) {
-                myChart.options.scales.y.max = 3000000;  // 최대값을 300만으로 설정
-                myChart.options.scales.y.ticks.stepSize = 300000;  // 눈금 간격을 30만으로 설정
-            } else if (totalData < 5000000) {
-                myChart.options.scales.y.max = 5000000;  // 최대값을 500만으로 설정
-                myChart.options.scales.y.ticks.stepSize = 500000;  // 눈금 간격을 50만으로 설정
-            } else {
-                myChart.options.scales.y.max = 10000000;  // 최대값을 1000만으로 설정
-                myChart.options.scales.y.ticks.stepSize = 1000000;  // 눈금 간격을 100만으로 설정
-            }
-        }
-
-        function fetchData() {
-            fetch('https://iubns.net:3000/data')
-            .then(response => response.json())
-            .then(data => {
-                updateData(data.totalData); // 서버로부터 받은 데이터로 그래프를 업데이트
-            })
-            .catch(error => console.error('Error:', error));
-        }
-
-        // 페이지 로드 시 데이터 가져오기
-        fetchData();
-
-        // 5초마다 데이터 갱신
-        setInterval(fetchData, 3000);
+        mario.addEventListener('click', triggerJump);
     </script>
 </body>
 </html>
