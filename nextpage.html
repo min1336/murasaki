@@ -3,10 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>테스트 시작</title>
+    <title>테스트 상황</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+        .situation {
+            border: 2px solid black;
+            padding: 20px;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .situation::after {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 1.2em;
+        }
+        .choice-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .choice {
+            border: 2px solid black;
+            width: 45%;
+            padding: 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .choice:hover {
+            background-color: #f0e68c;
+        }
+    </style>
 </head>
 <body>
-    <h1>당신의 열매를 찾는 테스트가 시작됩니다!</h1>
-    <p>이곳에 테스트 질문이나 기능을 추가하세요.</p>
+    <div class="container">
+        <div class="situation">
+            1. 프로젝트 마감이 가까워졌을 때 모두가 지쳐 보인다면, 나는?
+        </div>
+        <div class="choice-container">
+            <div class="choice" onclick="selectChoice('답변 1')">희락 : 밝은 이야기로 분위기를 환기시켜본다.</div>
+            <div class="choice" onclick="selectChoice('답변 2')">온유: 필요한 만큼 휴식을 제안하고, 함께 쉬어간다</div>
+        </div>
+    </div>
+
+    <!-- <script>
+        function selectChoice(choice) {
+            alert('선택한 답변: ' + choice);
+            window.location.href = "thirdpage.html"; // 선택 후 세 번째 페이지로 이동
+        }
+    </script> -->
+    <script>
+        // 9가지 결과를 추적하는 배열
+        let results = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        function selectChoice(choiceIndex) {
+            // 선택한 답변에 따라 해당 변수 값 증가
+            results[choiceIndex] += 1;
+            alert('선택한 답변: 답변 ' + (choiceIndex + 1) + '\n현재 결과: ' + results);
+            window.location.href = "thirdpage.html"; // 세 번째 페이지로 이동
+        }
+    </script>
 </body>
 </html>
