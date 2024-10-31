@@ -461,25 +461,15 @@
             sessionStorage.setItem('gentlenessScore', gentlenessScore + parseInt(gentleness2.value));
             sessionStorage.setItem('selfControlScore', selfControlScore + parseInt(selfControl2.value));
 
-            const loveTotal = parseFloat(love1.value) + parseInt(love2.value);
-            const joyTotal = parseFloat(joy1.value) + parseInt(joy2.value);
-            const peaceTotal = parseFloat(peace1.value) + parseInt(peace2.value);
-            const patienceTotal = parseFloat(patience1.value) + parseInt(patience2.value);
-            const kindnessTotal = parseFloat(kindenss1.value) + parseInt(kindness2.value);
-            const goodnesstotal = parseFloat(goodness1.value) + parseInt(goodness2.value);
-            const faithfulnessTotal = parseFloat(faithfulness1.value) + parseInt(faithfulness2.value);
-            const gentlenessTotal = parseFloat(gentleness1.value) + parseInt(gentleness2.value);
-            const selfControlTotal = parseFloat(selfControl1.value) + parseInt(selfControl2.value);
-
-            const loveAverage = loveTotal / 2;
-            const joyAverage = joyTotal / 2;
-            const peaceAvaerage = peaceTotal / 2;
-            const patienceAverage = patienceTotal / 2;
-            const kindnessAverage = kindnessTotal / 2;
-            const goodnessAverage = goodnesstotal / 2;
-            const faithfulnessAverage = faithfulnessTotal / 2;
-            const gentlenessAverage = gentlenessTotal / 2;
-            const selfControlAverage = selfControlTotal / 2;
+            const loveAverage = loveScore / 2;
+            const joyAverage = joyScore / 2;
+            const peaceAvaerage = peaceScore / 2;
+            const patienceAverage = patienceScore / 2;
+            const kindnessAverage = kindnessScore / 2;
+            const goodnessAverage = goodnessScore / 2;
+            const faithfulnessAverage = faithfulnessScore / 2;
+            const gentlenessAverage = gentlenessScore / 2;
+            const selfControlAverage = selfControlScore / 2;
 
             sessionStorage.setItem('loveAverage', loveAverage);
             sessionStorage.setItem('joyAverage', joyAverage);

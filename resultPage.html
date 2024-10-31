@@ -37,6 +37,16 @@
         const gentlenessScore = sessionStorage.getItem('gentlenessScore');
         const selfControlScore = sessionStorage.getItem('selfControlScore');
 
+        const loveAveragePage = parseFloat(sessionStorage.getItem('loveAverage')) || 0;
+        const joyAveragePage = parseFloat(sessionStorage.getItem('joyAverage')) || 0;
+        const peaceAveragePage = parseFloat(sessionStorage.getItem('peaceAverage')) || 0;  // 오타 수정
+        const patienceAveragePage = parseFloat(sessionStorage.getItem('patienceAverage')) || 0;
+        const kindnessAveragePage = parseFloat(sessionStorage.getItem('kindnessAverage')) || 0;
+        const goodnessAveragePage = parseFloat(sessionStorage.getItem('goodnessAverage')) || 0;
+        const faithfulnessAveragePage = parseFloat(sessionStorage.getItem('faithfulnessAverage')) || 0;
+        const gentlenessAveragePage = parseFloat(sessionStorage.getItem('gentlenessAverage')) || 0;
+        const selfControlAveragePage = parseFloat(sessionStorage.getItem('selfControlAverage')) || 0;
+
         const resultDisplay = document.getElementById('result-display');
         resultDisplay.innerHTML = `
             사랑 점수: ${loveScore}<br>
@@ -47,29 +57,18 @@
             선함 점수: ${goodnessScore}<br>
             신실함 점수: ${faithfulnessScore}<br>
             온유 점수: ${gentlenessScore}<br>
-            절제 점수: ${selfControlScore}<br>
+            절제 점수: ${selfControlScore}<br><br>
+
+            사랑 평균: ${loveAveragePage}<br>
+            기쁨 평균: ${joyAveragePage}<br>
+            평화 평균: ${peaceAveragePage}<br>
+            인내 평균: ${patienceAveragePage}<br>
+            친절 평균: ${kindnessAveragePage}<br>
+            선함 평균: ${goodnessAveragePage}<br>
+            신실함 평균: ${faithfulnessAveragePage}<br>
+            온유 평균: ${gentlenessAveragePage}<br>
+            절제 평균: ${selfControlAveragePage}<br>
         `;
-
-        const loveAveragePage = parseFloat(sessionStorage.getItem('loveAverage')) || 0;
-        const joyAveragePage = parseFloat(sessionStorage.getItem('joyAverage')) || 0;
-        const peaceAvaerage = parseFloat(sessionStorage.getItem('peaceAvaerage')) || 0;
-        const patienceAveragePage = parseFloat(sessionStorage.getItem('patienceAverage')) || 0;
-        const kindnessAveragePage = parseFloat(sessionStorage.getItem('kindnessAverage')) || 0;
-        const goodnessAveragePage = parseFloat(sessionStorage.getItem('goodnessAverage')) || 0;
-        const faithfulnessAveragePage = parseFloat(sessionStorage.getItem('faithfulnessAverage')) || 0;
-        const gentlenessAveragePage = parseFloat(sessionStorage.getItem('gentlenessAverage')) || 0;
-        const selfControlAveragePage = parseFloat(sessionStorage.getItem('selfControlAverage')) || 0;
-
-        document.getElementById('final-container').textContent = '사랑 평균 : ${loveAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '기쁨 평균 : ${joyAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '평화 평균 : ${peaceAvaerage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '인내 평균 : ${patienceAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '친절 평균 : ${kindnessAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '선함 평균 : ${goodnessAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '신실함 평균 : ${faithfulnessAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '온유 평균 : ${gentlenessAveragePage.toFixed(2)}';
-        document.getElementById('final-container').textContent = '절제 평균 : ${selfControlAveragePage.toFixed(2)}';
-
-    </script>
+        </script>
 </body>
 </html>
