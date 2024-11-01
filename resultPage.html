@@ -3,72 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>테스트 결과</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #4a8a4d;
-        }
-        .result-container {
-            margin-top: 50px;
-        }
-    </style>
+    <title>Result Page</title>
 </head>
 <body>
-    <h1>테스트 결과</h1>
-    <div class="result-container">
-        <p id="result-display">결과를 불러오는 중...</p>
-    </div>
+    <h1>Result Page</h1>
+    <div id="result-display"></div>
 
     <script>
-        const loveScore = sessionStorage.getItem('loveScore');
-        const joyScore = sessionStorage.getItem('joyScore');
-        const peaceScore = sessionStorage.getItem('peaceScore');
-        const patienceScore = sessionStorage.getItem('patienceScore');
-        const kindnessScore = sessionStorage.getItem('kindnessScore');
-        const goodnessScore = sessionStorage.getItem('goodnessScore');
-        const faithfulnessScore = sessionStorage.getItem('faithfulnessScore');
-        const gentlenessScore = sessionStorage.getItem('gentlenessScore');
-        const selfControlScore = sessionStorage.getItem('selfControlScore');
+        const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
+        const resultDisplay = document.getElementById("result-display");
 
-        const loveAveragePage = parseFloat(sessionStorage.getItem('loveAverage')) || 0;
-        const joyAveragePage = parseFloat(sessionStorage.getItem('joyAverage')) || 0;
-        const peaceAveragePage = parseFloat(sessionStorage.getItem('peaceAverage')) || 0;  // 오타 수정
-        const patienceAveragePage = parseFloat(sessionStorage.getItem('patienceAverage')) || 0;
-        const kindnessAveragePage = parseFloat(sessionStorage.getItem('kindnessAverage')) || 0;
-        const goodnessAveragePage = parseFloat(sessionStorage.getItem('goodnessAverage')) || 0;
-        const faithfulnessAveragePage = parseFloat(sessionStorage.getItem('faithfulnessAverage')) || 0;
-        const gentlenessAveragePage = parseFloat(sessionStorage.getItem('gentlenessAverage')) || 0;
-        const selfControlAveragePage = parseFloat(sessionStorage.getItem('selfControlAverage')) || 0;
+        let totalNextPageScore = 0;
+        let totalThirdPageScore = 0;
 
-        const resultDisplay = document.getElementById('result-display');
-        resultDisplay.innerHTML = `
-            사랑 점수: ${loveScore}<br>
-            기쁨 점수: ${joyScore}<br>
-            평화 점수: ${peaceScore}<br>
-            인내 점수: ${patienceScore}<br>
-            친절 점수: ${kindnessScore}<br>
-            선함 점수: ${goodnessScore}<br>
-            신실함 점수: ${faithfulnessScore}<br>
-            온유 점수: ${gentlenessScore}<br>
-            절제 점수: ${selfControlScore}<br><br>
+        for (const score of scores) {
+            const nextpageScoreValue = parseInt(sessionStorage.getItem(`nextpage_${score}Score`)) || 0;
+            const thirdpageScoreValue = parseInt(sessionStorage.getItem(`thirdpage_${score}Score`)) || 0;
+            const totalScore = nextpageScoreValue + thirdpageScoreValue;
 
-            사랑 평균: ${loveAveragePage}<br>
-            기쁨 평균: ${joyAveragePage}<br>
-            평화 평균: ${peaceAveragePage}<br>
-            인내 평균: ${patienceAveragePage}<br>
-            친절 평균: ${kindnessAveragePage}<br>
-            선함 평균: ${goodnessAveragePage}<br>
-            신실함 평균: ${faithfulnessAveragePage}<br>
-            온유 평균: ${gentlenessAveragePage}<br>
-            절제 평균: ${selfControlAveragePage}<br>
-        `;
-        </script>
+            // Display each score
+            const scoreElement = document.createElement("p");
+            scoreElement.textContent = `${score} 점수: ${nextpageScoreValue} (nextpage) + ${thirdpageScoreValue} (thirdpage) = ${totalScore}`;
+            resultDisplay.appendChild(scoreElement);
+
+            totalNextPageScore += nextpageScoreValue;
+            totalThirdPageScore += thirdpageScoreValue;
+        }
+    </script>
 </body>
 </html>

@@ -24,11 +24,51 @@
             margin-bottom: 20px;
         }
         .options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             margin: 10px 0;
         }
-        .option-label {
-            font-size: 1em;
+        .radio-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1em;
             color: #333;
+            transition: color 0.3s ease;
+        }
+        .radio-container input[type="radio"] {
+            display: none;
+        }
+        .radio-mark {
+            height: 20px;
+            width: 20px;
+            background-color: #f0f8ff;
+            border: 2px solid #4a8a4d;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .radio-container input[type="radio"]:checked + .radio-mark {
+            background-color: #4a8a4d;
+            border-color: #4a8a4d;
+            animation: pulse 0.5s ease;
+        }
+        .radio-container input[type="radio"]:checked + .radio-mark::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .radio-container:hover .radio-mark {
+            border-color: #37683a;
+            background-color: #4a8a4d53;
         }
         button {
             background-color: #4a8a4d;
@@ -41,449 +81,140 @@
             margin-top: 20px;
         }
         button:hover {
-                    background-color: #37683a;
-                }
-                /* 라디오 버튼 컨테이너 */
-        .options {
-            display: flex;
-            justify-content: center; /* 가로 중앙 정렬 */
-            gap: 15px; /* 각 라디오 버튼 사이 간격 */
-            margin: 10px 0;
+            background-color: #37683a;
         }
-
-        /* 커스텀 라디오 버튼 스타일 */
-        .radio-container {
-            display: flex;
-            align-items: center;
-            margin: 8px 0;
-            cursor: pointer;
-            font-size: 1.1em;
-            color: #333;
-            transition: color 0.3s ease;
-        }
-
-        /* 기본 라디오 버튼 숨김 */
-        .radio-container input[type="radio"] {
-            display: none;
-        }
-
-        /* 커스텀 라벨 스타일 */
-        .radio-mark {
-            height: 20px;
-            width: 20px;
-            background-color: #f0f8ff;
-            border: 2px solid #4a8a4d;
-            border-radius: 50%;
-            margin-right: 10px;
-            position: relative;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* 체크된 상태일 때 스타일 */
-        .radio-container input[type="radio"]:checked + .radio-mark {
-            background-color: #4a8a4d;
-            border-color: #4a8a4d;
-        }
-
-        /* 체크된 상태에서 중심의 작은 점 */
-        .radio-container input[type="radio"]:checked + .radio-mark::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* 호버 효과 */
-        .radio-container:hover .radio-mark {
-            border-color: #37683a;
-            background-color: #4a8a4d53;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>성령의 9가지 열매 찾기</h1>
-        <div id="quiz">
-            <!-- 첫 번째 질문 -->
-            <div class="question">
-                <p>친구가 오랫동안 우울의 동굴 속에 있다면, 그 친구의 곁에서 힘이 되어주려 한다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="love" value="5">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="love" value="4">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="love" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="love" value="2">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="love" value="1">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+    <form>
+        <div class="container">
+            <h1>성령의 9가지 열매 찾기</h1>
+            <div id="quiz">
+                <!-- 질문 항목들 -->
+                 <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="love" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="love" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="love" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="love" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="love" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-
-            <br>
-            <br>
-
-            <!-- 두 번째 질문 -->
-            <div class="question">
-                <p>하루동안 작은 행운들을 만나면, 그것들이 쌓여 행복한 하루를 만들어준다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="joy" value="5">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="joy" value="4">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="joy" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="joy" value="3">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="joy" value="1">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="joy" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-
-            <br>
-            <br>
-
-            <!-- 세 번째 질문 -->
-            <div class="question">
-                <p>감정이 상해 있을 때에는 상대가 대화를 요청해도, 일단 내 감정을 정리하는 것이 우선이다</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="peace" value="1">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="peace" value="2">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="peace" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="peace" value="4">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="peace" value="5">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="peace" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- 네 번째 질문 -->
-            <div class="question">
-                <p>회의 중에 팀원이 계속해서 예민함을 보여도, 최대한 이성적으로 대화하려 노력한다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="patience" value="5">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="patience" value="4">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="patience" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="patience" value="2">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="patience" value="1">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="patience" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- 다섯 번째 질문 -->
-            <div class="question">
-                <p>내가 힘든 상황에 있으면 남에게 베풀 마음도 여유도 사라진다</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="kindness" value="1">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="kindness" value="2">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="kindness" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="kindness" value="4">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="kindness" value="5">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="kindness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- 여섯 번째 질문 -->
-            <div class="question">
-                <p>첫인상이 별로면, 그 사람에게 정이 안 가는 편이다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="goodness" value="1">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="goodness" value="2">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="goodness" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="goodness" value="4">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="goodness" value="5">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="goodness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- 일곱 번째 질문 -->
-            <div class="question">
-                <p>몸이 좋지 않아서 집에 가고 싶어도 그 자리를 끝까지 지키는 편이다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="faithfulness" value="5">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="faithfulness" value="4">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="faithfulness" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="faithfulness" value="2">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="faithfulness" value="1">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- 여덟 번째 질문 -->
-            <div class="question">
-                <p>나는 감정 기복이 없는 편이다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="gentleness" value="5">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="gentleness" value="4">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="gentleness" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="gentleness" value="2">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="gentleness" value="1">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="gentleness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- 아홉 번째 질문 -->
-            <div class="question">
-                <p>나는 때로 불필요한 일에도 에너지를 쏟고, 금방 지친다.</p>
-                <div class="options">
-                    <label class="radio-container">
-                        <input type="radio" name="selfControl" value="1">
-                        <span class="radio-mark"></span>
-                        매우 그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="selfControl" value="2">
-                        <span class="radio-mark"></span>
-                        그렇다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="selfControl" value="3">
-                        <span class="radio-mark"></span>
-                        보통이다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="selfControl" value="4">
-                        <span class="radio-mark"></span>
-                        아니다
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="selfControl" value="5">
-                        <span class="radio-mark"></span>
-                        매우 아니다
-                    </label>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="selfControl" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
                 </div>
+                <br><br>
+                
+                <!-- 다음 페이지 버튼 -->
+                <button type="button" onclick="submitTest()">결과 보기</button>
             </div>
-
-            <!-- 버튼으로 결과 제출 -->
-            <button onclick="submitTest()">결과 확인하기</button>
         </div>
-    </div>
-
+    </form>
     <script>
         function submitTest() {
-            // 사용자 입력 데이터 수집
-            const love2 = document.querySelector('input[name="love"]:checked');
-            const joy2 = document.querySelector('input[name="joy"]:checked');
-            const peace2 = document.querySelector('input[name="peace"]:checked');
-            const patience2 = document.querySelector('input[name="patience"]:checked');
-            const kindness2 = document.querySelector('input[name="kindness"]:checked');
-            const goodness2 = document.querySelector('input[name="goodness"]:checked');
-            const faithfulness2 = document.querySelector('input[name="faithfulness"]:checked');
-            const gentleness2 = document.querySelector('input[name="gentleness"]:checked');
-            const selfControl2 = document.querySelector('input[name="selfControl"]:checked');
-    
-            // 모든 질문에 답하지 않은 경우 알림
-            if (!love2 || !joy2 || !peace2 || !patience2 || !kindness2 || !goodness2 || !faithfulness2 || !gentleness2 || !selfControl2) {
-                alert('모든 질문에 답해주세요!');
-                return;
+            const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
+            for (const score of scores) {
+                const answer = document.querySelector(`input[name="${score}"]:checked`);
+                if (!answer) {
+                    alert('모든 질문에 답해주세요!');
+                    return;
+                }
+                sessionStorage.setItem(`thirdpage_${score}Score`, answer.value);
             }
-    
-            // 기존 점수 가져오기 및 추가
-            const loveScore = parseInt(sessionStorage.getItem('loveScore')) || 0;
-            const joyScore = parseInt(sessionStorage.getItem('joyScore')) || 0;
-            const peaceScore = parseInt(sessionStorage.getItem('peaceScore')) || 0;
-            const patienceScore = parseInt(sessionStorage.getItem('patienceScore')) || 0;
-            const kindnessScore = parseInt(sessionStorage.getItem('kindnessScore')) || 0;
-            const goodnessScore = parseInt(sessionStorage.getItem('goodnessScore')) || 0;
-            const faithfulnessScore = parseInt(sessionStorage.getItem('faithfulnessScore')) || 0;
-            const gentlenessScore = parseInt(sessionStorage.getItem('gentlenessScore')) || 0;
-            const selfControlScore = parseInt(sessionStorage.getItem('selfControlScore')) || 0;
-    
-            // 점수 업데이트
-            sessionStorage.setItem('loveScore', loveScore + parseInt(love2.value));
-            sessionStorage.setItem('joyScore', joyScore + parseInt(joy2.value));
-            sessionStorage.setItem('peaceScore', peaceScore + parseInt(peace2.value));
-            sessionStorage.setItem('patienceScore', patienceScore + parseInt(patience2.value));
-            sessionStorage.setItem('kindnessScore', kindnessScore + parseInt(kindness2.value));
-            sessionStorage.setItem('goodnessScore', goodnessScore + parseInt(goodness2.value));
-            sessionStorage.setItem('faithfulnessScore', faithfulnessScore + parseInt(faithfulness2.value));
-            sessionStorage.setItem('gentlenessScore', gentlenessScore + parseInt(gentleness2.value));
-            sessionStorage.setItem('selfControlScore', selfControlScore + parseInt(selfControl2.value));
-
-            const loveAverage = loveScore / 2;
-            const joyAverage = joyScore / 2;
-            const peaceAvaerage = peaceScore / 2;
-            const patienceAverage = patienceScore / 2;
-            const kindnessAverage = kindnessScore / 2;
-            const goodnessAverage = goodnessScore / 2;
-            const faithfulnessAverage = faithfulnessScore / 2;
-            const gentlenessAverage = gentlenessScore / 2;
-            const selfControlAverage = selfControlScore / 2;
-
-            sessionStorage.setItem('loveAverage', loveAverage);
-            sessionStorage.setItem('joyAverage', joyAverage);
-            sessionStorage.setItem('peaceAvaerage', peaceAvaerage);
-            sessionStorage.setItem('patienceAverage', patienceAverage);
-            sessionStorage.setItem('kindnessAverage', kindnessAverage);
-            sessionStorage.setItem('goodnessAverage', goodnessAverage);
-            sessionStorage.setItem('faithfulnessAverage', faithfulnessAverage);
-            sessionStorage.setItem('gentlenessAverage', gentlenessAverage);
-            sessionStorage.setItem('selfControlAverage', selfControlAverage);
-    
-            window.location.href = "resultPage.html"; // 다음 페이지로 이동
+            window.location.href = "resultPage.html";
         }
     </script>
-    
 </body>
 </html>
