@@ -5,13 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 차트의 크기를 조정하는 CSS */
+        #radarChart {
+            width: 300px !important; /* 화면에 표시되는 너비 */
+            height: 300px !important; /* 화면에 표시되는 높이 */
+        }
+        #lineChart {
+            width: 300px !important; /* 화면에 표시되는 너비 */
+            height: 300px !important; /* 화면에 표시되는 높이 */
+        }
+        #barChart {
+            width: 300px !important; /* 화면에 표시되는 너비 */
+            height: 300px !important; /* 화면에 표시되는 높이 */
+        }
+    </style>
 </head>
 <body>
     <h1>Result Page</h1>
     <div id="result-display"></div>
-    <canvas id="radarChart" width="150" height="150"></canvas>
-    <canvas id="lineChart" width="150" height="150"></canvas>
-    <canvas id="barChart" width="150" height="150"></canvas>
+    <canvas id="radarChart" width="400" height="400"></canvas>
+    <canvas id="lineChart" width="400" height="400"></canvas>
+    <canvas id="barChart" width="400" height="400"></canvas>
 
     <script>
         const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
