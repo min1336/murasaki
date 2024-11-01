@@ -7,9 +7,12 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             background-image: url('https://raw.githubusercontent.com/min1336/murasaki/refs/heads/main/startpage_main.jpeg');
-            background-size: 100% 100%; /* 화면에 맞게 배경을 꽉 채움 */
+            background-size: cover; /* 모든 화면에 맞게 배경을 꽉 채움 */
             background-position: center;
             background-repeat: no-repeat;
             margin: 0;
@@ -18,34 +21,32 @@
             overflow: hidden;
         }
         .container {
-            margin: 0;
             width: 90%; /* 화면 양옆에 여유 공간 추가 */
             max-width: 1000px;
-            height: 90%; /* 세로 공간 여유를 위해 높이 조정 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1;
             background-color: rgba(255, 255, 255, 0.85);
             padding: 20px;
             border-radius: 10px;
+            box-sizing: border-box;
         }
         h1 {
             color: #4a8a4d;
-            font-size: 3em; /* 제목 글자 크기 조금 줄임 */
+            font-size: 3em; /* 제목 글자 크기 조정 */
         }
         p {
-            font-size: 1.4em; /* 설명 글자 크기 조금 줄임 */
+            font-size: 1.4em; /* 설명 글자 크기 조정 */
             color: #333;
-            line-height: 1.4em; /* 줄 간격 조정 */
+            line-height: 1.4em;
             margin: 10px 0;
         }
         button {
             background-color: #4a8a4d;
             color: white;
-            padding: 12px 24px; /* 버튼 패딩 조정 */
-            font-size: 1.3em; /* 버튼 글자 크기 조금 줄임 */
+            padding: 12px 24px;
+            font-size: 1.3em;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -54,7 +55,7 @@
             background-color: #37683a;
         }
         .image-container img {
-            width: 300px; /* 이미지 너비 조금 줄임 */
+            width: 300px;
             height: auto;
             margin-top: 20px;
         }
