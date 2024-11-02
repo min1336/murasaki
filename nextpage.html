@@ -52,6 +52,8 @@
             background-size: contain; /* 캐릭터를 비율에 맞게 조정 */
             background-repeat: no-repeat; /* 반복하지 않도록 설정 */
             background-position: center; /* 이미지 중앙 정렬 */
+            left: 50%; /* 가운데 정렬 */
+            transform: translateX(-50%); /* 가운데 정렬 조정 */
         }
 
         .container {
@@ -137,14 +139,13 @@
     <div class="progress-bar-container">
         <div class="progress-bar">
             <div class="step active">
-                <div class="character" style="left: 10%;"></div> <!-- 첫 번째 칸에 캐릭터 이미지 -->
+                <!-- 첫 번째 칸 -->
             </div>
             <div class="step"></div> <!-- 두 번째 칸 -->
+            <div class="character"></div> <!-- 첫 번째 칸과 두 번째 칸 사이에 캐릭터 이미지 -->
             <div class="step"></div>
             <div class="step"></div>
             <div class="step"></div>
-            <div class="step"></div>
-            <div class="character" style="left: 60%;"></div> <!-- 두 번째 칸에 캐릭터 이미지 -->
         </div>
     </div>
 
