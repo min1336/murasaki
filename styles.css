@@ -20,7 +20,7 @@
 }
 
 .end-image {
-    position: inherit; /* 진행 바의 끝에 고정 */
+    position: relative; /* 진행 바의 끝에 고정 */
     top: 50%; /* 세로 중앙 맞춤 */
     right: -50px; /* 진행 바의 오른쪽 끝에 위치 조정 (필요에 따라 조정) */
     width: 45%; /* 이미지의 크기 조정 (필요에 따라 조정) */
