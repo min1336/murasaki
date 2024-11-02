@@ -6,65 +6,80 @@
     <title>Result Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        body {
+            display: flex; /* Flexbox 사용 */
+            flex-direction: column; /* 세로 방향으로 정렬 */
+            justify-content: center; /* 수직 중앙 정렬 */
+            align-items: center; /* 수평 중앙 정렬 */
+            height: 100vh; /* 전체 높이를 뷰포트 높이에 맞춤 */
+            margin: 0; /* 기본 여백 제거 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            background-color: #f9f9f9; /* 배경 색상 (선택사항) */
+        }
+    
         #radarChart {
             width: 400px !important;
             height: 400px !important;
         }
+    
         #home {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 1em;
-            background-color: #00796b;
+            background-color: #7CB567;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
+
+        #home:hover {
+            background-color: #37683a;
+        }
+    
         .image-container img {
             width: 500px;
             height: auto;
             margin-top: 20px;
         }
+    
         .qr-image img {
-            width: 150px;
-            height: auto;
+            width: 80px; /* QR 코드 이미지 크기 */
+            height: 80px;
             margin-top: 20px;
         }
-        body{
-            text-align: center;
-        }
     </style>
+    
 </head>
 <body>
     <table>
         <tr>
-            <td colspan="2" style="text-align:right">기록을 남기고 싶다면 <br> 휴대폰으로 QR사진을 찍어가세요</td>
-            <td colspan="2" style="text-align:left"><img id="QR" class="qr-image" src="#"></td>
-        </tr>
-        <tr>
-            <td style="text-align:center">당신의 열매는?</td>
-            <td colspan="2" rowspan="6">
+            <td style="text-align:center">
+                <h1>당신의 열매는?</h1>
+            </td>
+            <td rowspan="2">
                 <canvas id="radarChart" width="250" height="250"></canvas>
             </td>
-            <td id="rank-2"></td>
-            <td id="rank-3"></td>
         </tr>
         <tr>
             <td>
                 <div class="image-container">
-                    <img id="winner-image" src="#" alt="Selected winner image">
+                    <img id="winner-image" src="#" alt="Selected winner image" style="max-width: 100%; height: auto;">
                 </div>
             </td>
-            <td id="rank-4"></td>
-            <td id="rank-5"></td>
         </tr>
         <tr>
-            <td rowspan="4", style="text-align:center">
+            <td rowspan="4" style="text-align:center">
                 <h1 id="selected-winner" style="display: none;"></h1>
-                <p id="winner-description"></p> <!-- 설명을 출력할 요소 추가 -->
+                <p id="winner-description"></p>
+            </td>
+            <td style="text-align:center">
+                <img id="QR" class="qr-image" src="#" style="max-width: 80px; height: 80px;"><br>
+                기록을 남기고 싶다면 휴대폰으로 QR사진을 찍어가세요!
             </td>
         </tr>
-    </table>
+    </table>    
+    <br><br><br>
     <button id="home" class="home">홈으로 돌아가기</button>
 
     <script>
