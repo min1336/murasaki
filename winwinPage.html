@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공동 우승 항목 선택</title>
+</head>
+<body>
+    <h1>공동 우승 항목 중 하나를 선택하세요</h1>
+    <div id="winners-list"></div>
+    
+    <!-- 선택 버튼 -->
+    <button onclick="submitWinner()">선택 완료</button>
+
+    <script>
+        // 공동우승 항목을 sessionStorage에서 가져오기
+        const jointWinners = JSON.parse(sessionStorage.getItem("jointWinners")) || [];
+        const winnersList = document.getElementById("winners-list");
+
+        // 공동우승 항목을 라디오 버튼으로 표시
+        if (jointWinners.length > 0) {
+            jointWinners.forEach((winner, index) => {
+                const label = document.createElement("label");
+                label.innerHTML = `
+                    <input type="radio" name="winner" value="${winner}">
+                    ${winner}
+                `;
+                winnersList.appendChild(label);
+                winnersList.appendChild(document.createElement("br"));
+            });
+        } else {
+            winnersList.textContent = "공동 우승 항목이 없습니다.";
+        }
+
+        // 선택한 항목을 sessionStorage에 저장하고 다음 페이지로 이동
+        function submitWinner() {
+            const selectedWinner = document.querySelector('input[name="winner"]:checked');
+            if (selectedWinner) {
+                sessionStorage.setItem("selectedWinner", selectedWinner.value);
+                alert(`선택한 항목: ${selectedWinner.value}`);
+                // 다음 페이지로 이동 (예: resultPage.html)
+                window.location.href = "resultPage.html";
+            } else {
+                alert("공동 우승 항목 중 하나를 선택해주세요.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -22,34 +22,75 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .image-container img {
+            width: 500px;
+            height: auto;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Result Page</h1>
-    <div id="result-display"></div>
-    <div id="ranking-display"></div>
-    <canvas id="radarChart" width="400" height="400"></canvas>
+    <table>
+        <tr>
+            <td>
+                <div class="image-container">
+                    <img src="https://github.com/min1336/murasaki/blob/main/startpage_character.png?raw=true" alt="Cat holding clovers">
+                </div>
+            </td>
+            <td>
+                <canvas id="radarChart" width="400" height="400"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                당신의 주 열매는?<br>
+                <p id="selected-winner"></p>
+            </td>
+            <td>
+                <div id="result-display"></div>
+                <div id="ranking-display"></div>
+            </td>
+            
+        </tr>
+    </table>
     <button id="home" class="home">홈으로 돌아가기</button>
 
     <script>
-        const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
-        const resultDisplay = document.getElementById("result-display");
+    // 점수 종류 배열
+    const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
 
-        let totalNextPageScore = 0;
-        let totalThirdPageScore = 0;
+    // 결과를 표시할 HTML 요소 선택
+    const resultDisplay = document.getElementById("result-display");
 
-        const totalScores = [];
+    // 각 페이지의 총 점수를 저장할 변수 초기화
+    let totalNextPageScore = 0; // nextpage에서의 총 점수
+    let totalThirdPageScore = 0; // thirdpage에서의 총 점수
 
-        for (const score of scores) {
-            const nextpageScoreValue = parseInt(sessionStorage.getItem(`nextpage_${score}Score`)) || 0;
-            const thirdpageScoreValue = parseInt(sessionStorage.getItem(`thirdpage_${score}Score`)) || 0;
-            const totalScore = nextpageScoreValue + thirdpageScoreValue;
+    // 점수 정보를 저장할 배열 초기화
+    const totalScores = [];
 
-            totalScores.push({ scoreType: score, totalScore });
+    const selectedWinner = sessionStorage.getItem("selectedWinner") || sessionStorage.getItem("highestScore") || "선택된 항목이 없습니다.";
+    document.getElementById("selected-winner").textContent = `${selectedWinner}`;
 
-            totalNextPageScore += nextpageScoreValue;
-            totalThirdPageScore += thirdpageScoreValue;
-        }
+    // scores 배열을 순회하며 각 점수를 계산
+    for (const score of scores) {
+        // sessionStorage에서 nextpage 점수 가져오기, 없으면 0으로 설정
+        const nextpageScoreValue = parseInt(sessionStorage.getItem(`nextpage_${score}Score`)) || 0;
+        
+        // sessionStorage에서 thirdpage 점수 가져오기, 없으면 0으로 설정
+        const thirdpageScoreValue = parseInt(sessionStorage.getItem(`thirdpage_${score}Score`)) || 0;
+        
+        // 두 페이지의 점수를 합산하여 총 점수 계산
+        const totalScore = nextpageScoreValue + thirdpageScoreValue;
+
+        // 점수 종류와 총 점수를 객체로 저장
+        totalScores.push({ scoreType: score, totalScore });
+
+        // 각 페이지의 총 점수를 누적
+        totalNextPageScore += nextpageScoreValue; // nextpage 총 점수 누적
+        totalThirdPageScore += thirdpageScoreValue; // thirdpage 총 점수 누적
+    }
+
 
         // 점수 순위 매기기
         const sortedScores = totalScores.sort((a, b) => b.totalScore - a.totalScore);
@@ -63,8 +104,9 @@
             rankingDisplay.appendChild(rankElement);
         });
 
-        // 차트 데이터
-        const chartLabels = scores;
+        const scoreskor = ['사랑', '희락', '화평', '오래참음', '친절', '양선', '자비', '온유', '절제'];
+// 차트 데이터
+        const chartLabels = scoreskor;
         const chartData = totalScores.map(item => item.totalScore);
 
         // 9각형 그래프 생성
