@@ -43,6 +43,9 @@
 
     <button id="capture">결과 캡쳐 및 QR 코드 생성</button>
     <div id="qrcode"></div>
+    
+    <!-- 홈 버튼 추가 -->
+    <button id="home">홈으로 돌아가기</button>
 
     <script>
         const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
@@ -52,13 +55,7 @@
         let totalThirdPageScore = 0;
 
         const totalScores = [];
-        document.getElementById('home').addEventListener('click', function() {
-        // sessionStorage 초기화
-        sessionStorage.clear();
-        
-        // 첫 페이지로 이동
-        window.location.href = 'index.html'; // 첫 페이지의 파일명으로 변경하세요.
-    });
+
         for (const score of scores) {
             const nextpageScoreValue = parseInt(sessionStorage.getItem(`nextpage_${score}Score`)) || 0;
             const thirdpageScoreValue = parseInt(sessionStorage.getItem(`thirdpage_${score}Score`)) || 0;
@@ -73,14 +70,7 @@
             totalNextPageScore += nextpageScoreValue;
             totalThirdPageScore += thirdpageScoreValue;
         }
-        // 홈 버튼 클릭 이벤트
-document.getElementById('home').addEventListener('click', function() {
-        // sessionStorage 초기화
-        sessionStorage.clear();
-        
-        // 첫 페이지로 이동
-        window.location.href = 'index.html'; // 첫 페이지의 파일명으로 변경하세요.
-    });
+
         // 점수 순위 매기기
         const sortedScores = totalScores.sort((a, b) => b.totalScore - a.totalScore);
         
@@ -120,6 +110,7 @@ document.getElementById('home').addEventListener('click', function() {
                 }
             }
         });
+
         // 캡쳐 및 QR 코드 생성 버튼 클릭 이벤트
         document.getElementById('capture').addEventListener('click', function() {
             html2canvas(document.body).then(function(canvas) {
@@ -138,6 +129,15 @@ document.getElementById('home').addEventListener('click', function() {
                     height: 200
                 });
             });
+        });
+
+        // 홈 버튼 클릭 이벤트
+        document.getElementById('home').addEventListener('click', function() {
+            // sessionStorage 초기화
+            sessionStorage.clear();
+            
+            // 첫 페이지로 이동
+            window.location.href = 'index.html'; // 첫 페이지의 파일명으로 변경하세요.
         });
     </script>
 </body>
