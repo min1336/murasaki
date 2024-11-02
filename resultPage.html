@@ -5,28 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <style>
         /* 차트의 크기를 조정하는 CSS */
-        #radarChart {
-            width: 500px !important; /* 화면에 표시되는 너비 */
-            height: 500px !important; /* 화면에 표시되는 높이 */
+        #radarChart, #lineChart, #barChart {
+            width: 500px !important;
+            height: 500px !important;
         }
-        #lineChart {
-            width: 500px !important; /* 화면에 표시되는 너비 */
-            height: 500px !important; /* 화면에 표시되는 높이 */
+        body {
+            font-family: Arial, sans-serif;
         }
-        #barChart {
-            width: 500px !important; /* 화면에 표시되는 너비 */
-            height: 500px !important; /* 화면에 표시되는 높이 */
+        #result-display {
+            margin-bottom: 20px;
+        }
+        canvas {
+            display: block;
+            margin: 10px auto;
+        }
+        #qrcode {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
         }
     </style>
 </head>
 <body>
     <h1>Result Page</h1>
     <div id="result-display"></div>
+    <div id="ranking-display"></div>
     <canvas id="radarChart" width="400" height="400"></canvas>
-    <canvas id="lineChart" width="400" height="400"></canvas>
-    <canvas id="barChart" width="400" height="400"></canvas>
+
+    <button id="capture">결과 캡쳐 및 QR 코드 생성</button>
+    <div id="qrcode"></div>
 
     <script>
         const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
@@ -35,7 +51,6 @@
         let totalNextPageScore = 0;
         let totalThirdPageScore = 0;
 
-        // 합산 점수를 저장할 배열 초기화
         const totalScores = [];
 
         for (const score of scores) {
@@ -43,9 +58,8 @@
             const thirdpageScoreValue = parseInt(sessionStorage.getItem(`thirdpage_${score}Score`)) || 0;
             const totalScore = nextpageScoreValue + thirdpageScoreValue;
 
-            totalScores.push(totalScore);
+            totalScores.push({ scoreType: score, totalScore });
 
-            // Display each score
             const scoreElement = document.createElement("p");
             scoreElement.textContent = `${score} 점수: ${nextpageScoreValue} (nextpage) + ${thirdpageScoreValue} (thirdpage) = ${totalScore}`;
             resultDisplay.appendChild(scoreElement);
@@ -54,79 +68,63 @@
             totalThirdPageScore += thirdpageScoreValue;
         }
 
-        // 합산 점수를 이용한 9각형 그래프 생성
+        // 점수 순위 매기기
+        const sortedScores = totalScores.sort((a, b) => b.totalScore - a.totalScore);
+        
+        // 상위 순위 출력
+        const rankingDisplay = document.getElementById("ranking-display");
+        rankingDisplay.innerHTML = "<h2>순위</h2>";
+        sortedScores.forEach((item, index) => {
+            const rankElement = document.createElement("p");
+            rankElement.textContent = `${index + 1}위: ${item.scoreType} - 총 점수 ${item.totalScore}`;
+            rankingDisplay.appendChild(rankElement);
+        });
+
+        // 차트 데이터
+        const chartLabels = scores;
+        const chartData = totalScores.map(item => item.totalScore);
+
+        // 9각형 그래프 생성
         const ctx = document.getElementById("radarChart").getContext("2d");
         new Chart(ctx, {
             type: "radar",
             data: {
-                labels: scores,
-                datasets: [
-                    {
-                        label: "Total Combined Scores",
-                        data: totalScores,
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 1
-                    }
-                ]
+                labels: chartLabels,
+                datasets: [{
+                    label: "Total Combined Scores",
+                    data: chartData,
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1
+                }]
             },
             options: {
                 scales: {
                     r: {
                         beginAtZero: true,
-                        max: 10 // 최대 점수를 10으로 설정 (각 항목이 1~5점인 경우)
+                        max: 10
                     }
                 }
             }
         });
+        // 캡쳐 및 QR 코드 생성 버튼 클릭 이벤트
+        document.getElementById('capture').addEventListener('click', function() {
+            html2canvas(document.body).then(function(canvas) {
+                // 캔버스를 이미지로 변환
+                var imgData = canvas.toDataURL('image/png');
 
-        const rtx = document.getElementById("lineChart").getContext("2d");
-        new Chart(rtx, {
-            type: "line",
-            data: {
-                labels: scores,
-                datasets: [
-                    {
-                        label: "Total Combined Scores",
-                        data: totalScores,
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 10 // 최대 점수를 10으로 설정 (각 항목이 1~5점인 경우)
-                    }
-                }
-            }
-        });
-        const mtx = document.getElementById("barChart").getContext("2d");
-        new Chart(mtx, {
-            type: "bar",
-            data: {
-                labels: scores,
-                datasets: [
-                    {
-                        label: "Total Combined Scores",
-                        data: totalScores,
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 10 // 최대 점수를 10으로 설정 (각 항목이 1~5점인 경우)
-                    }
-                }
-            }
+                // 새 창에 캡처 이미지 표시
+                var newWindow = window.open();
+                newWindow.document.write('<img src="' + imgData + '" style="width:100%;">');
+
+                // QR 코드 생성
+                $('#qrcode').empty(); // 기존 QR 코드 제거
+                $('#qrcode').qrcode({
+                    text: imgData,
+                    width: 200,
+                    height: 200
+                });
+            });
         });
     </script>
 </body>
