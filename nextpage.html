@@ -18,9 +18,9 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100%; /* 전체 화면 너비 */
             background-color: #f0f0f0;
-            padding: 10px 0; /* 패딩을 줄여서 로딩 바 크기를 줄임 */
+            padding: 10px 0; /* 패딩 설정 */
             z-index: 1000;
         }
         .progress-bar {
@@ -28,10 +28,11 @@
             justify-content: center;
             gap: 5px;
             position: relative;
+            width: 100%; /* 전체 화면 너비 */
         }
         .progress-bar .step {
-            width: 50px; /* 너비를 줄임 */
-            height: 50px; /* 높이를 줄임 */
+            flex-grow: 1; /* 각 칸이 동일한 비율로 성장하도록 설정 */
+            height: 50px; /* 높이를 설정 */
             background-color: #d3d3d3;
             border-radius: 5px;
             overflow: hidden;
@@ -44,8 +45,7 @@
         /* 고정된 캐릭터 이미지 */
         .character {
             position: absolute;
-            top: -30px; /* 위로 튀어나오게 조정 */
-            left: 60px; /* 첫 번째와 두 번째 칸 사이의 위치로 이동 */
+            top: -20px; /* 위로 튀어나오게 조정 */
             width: 80px; /* 캐릭터 너비 조정 */
             height: 80px; /* 캐릭터 높이 조정 */
             background-image: url('https://github.com/min1336/murasaki/blob/main/runningcat.png?raw=true');
@@ -137,14 +137,14 @@
     <div class="progress-bar-container">
         <div class="progress-bar">
             <div class="step active">
-                <!-- 첫 번째 칸 -->
+                <div class="character" style="left: 10%;"></div> <!-- 첫 번째 칸에 캐릭터 이미지 -->
             </div>
-            <div class="character"></div> <!-- 고정된 캐릭터 이미지 -->
             <div class="step"></div> <!-- 두 번째 칸 -->
             <div class="step"></div>
             <div class="step"></div>
             <div class="step"></div>
             <div class="step"></div>
+            <div class="character" style="left: 60%;"></div> <!-- 두 번째 칸에 캐릭터 이미지 -->
         </div>
     </div>
 
@@ -186,4 +186,3 @@
     </script>
 </body>
 </html>
-
