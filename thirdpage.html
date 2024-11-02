@@ -6,88 +6,89 @@
     <title>행복축제 - MBTI 테스트</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* 추가 스타일 */
+        /* 전반적인 스타일 및 크기 조정 */
         body, html {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            font-size: 18px; /* 기본 폰트 크기 증가 */
         }
 
         .question {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 90px; /* 질문과 질문지 사이 간격을 더 넓게 설정 */
         }
 
         .options-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px; /* 간격 증가 */
             justify-content: center;
         }
 
         .options {
             display: flex;
-            gap: 10px;
+            gap: 15px; /* 버튼 사이 간격 증가 */
         }
 
         .radio-container {
             position: relative;
-            padding: 0 8px;
+            padding: 0 12px; /* 좌우 패딩 추가 */
         }
 
         /* 동그라미 크기 및 색상 설정 */
         .radio-mark {
             display: inline-block;
             border-radius: 50%;
-            border: 2px solid;
+            border: 3px solid;
         }
 
         /* 개별 동그라미의 크기 및 색상 설정 */
         .radio-container:nth-child(1) .radio-mark {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             border-color: #28a745;
         }
 
         .radio-container:nth-child(2) .radio-mark {
-            width: 28px;
-            height: 28px;
+            width: 38px;
+            height: 38px;
             border-color: #28a745;
         }
 
         .radio-container:nth-child(3) .radio-mark {
-            width: 18px;
-            height: 18px;
+            width: 28px;
+            height: 28px;
             border-color: #6c757d;
         }
 
         .radio-container:nth-child(4) .radio-mark {
-            width: 28px;
-            height: 28px;
+            width: 38px;
+            height: 38px;
             border-color: #6f42c1;
         }
 
         .radio-container:nth-child(5) .radio-mark {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             border-color: #6f42c1;
         }
 
         /* 텍스트 크기 조정 */
         .label-text {
-            font-size: 16px; /* 텍스트 크기를 키움 */
+            font-size: 20px;
             font-weight: normal; /* 텍스트를 얇게 설정 */
         }
 
         /* 진행바 스타일 */
         #progress-bar-container {
             position: relative;
-            width: 80%;
-            height: 30px;
+            width: 90%; /* 진행바 너비 증가 */
+            height: 40px; /* 진행바 높이 증가 */
             background-color: #e0e0e0;
             border-radius: 20px;
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
         #progress-bar {
@@ -101,11 +102,18 @@
         /* 캐릭터 이미지 스타일 */
         .end-image {
             position: absolute;
-            top: -50px; /* 진행바 위로 띄움 */
-            right: 0; /* 진행바의 맨 끝에 위치 */
-            transform: translateX(50%); /* 이미지가 바 끝에 걸쳐 있도록 조정 */
-            width: 120px; /* 캐릭터 이미지 크기를 더 키움 */
+            top: -60px; /* 진행바 위로 띄움 */
+            right: 0;
+            transform: translateX(50%);
+            width: 150px; /* 캐릭터 이미지 크기 증가 */
             height: auto;
+        }
+
+        /* 버튼 스타일 조정 */
+        button {
+            font-size: 18px; /* 버튼 폰트 크기 증가 */
+            padding: 15px 25px; /* 버튼 패딩 증가 */
+            cursor: pointer;
         }
         /* 점수에 따른 색상 적용 */
         .radio-container input[type="radio"]:checked + .radio-mark {
