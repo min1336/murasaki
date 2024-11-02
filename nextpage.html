@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행복축제 - MBTI 테스트</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 추가 스타일 */
+        .question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .options-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .radio-container {
+            position: relative;
+            padding: 0 8px;
+        }
+
+        .radio-mark {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #333;
+        }
+
+        .label-text {
+            width: 100px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <form>
@@ -16,38 +52,37 @@
         <div class="container">
             <div id="quiz">
                 <!-- 질문 항목들 -->
-                <br><br>
                 <div class="question">
                     <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
-                    <div class="options">
-                        <label class="radio-container"><input type="radio" name="love" value="5"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="love" value="4"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="love" value="3"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="love" value="2"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="love" value="1"><span class="radio-mark"></span></label>
-                    </div>
-                    <div class="labels">
-                        <span>매우 그렇다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전혀아니다</span>
+                    <div class="options-container">
+                        <span class="label-text">매우 그렇다</span>
+                        <div class="options">
+                            <label class="radio-container"><input type="radio" name="love" value="5"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="love" value="4"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="love" value="3"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="love" value="2"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="love" value="1"><span class="radio-mark"></span></label>
+                        </div>
+                        <span class="label-text">전혀 아니다</span>
                     </div>
                 </div>
-                <br><br>
+                
                 <!-- 나머지 질문들도 같은 형식으로 추가 -->
                 <div class="question">
                     <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
-                    <div class="options">
-                        <label class="radio-container"><input type="radio" name="joy" value="5"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="joy" value="4"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="joy" value="3"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="joy" value="2"><span class="radio-mark"></span></label>
-                        <label class="radio-container"><input type="radio" name="joy" value="1"><span class="radio-mark"></span></label>
-                    </div>
-                    <div class="labels">
-                        <span>매우 그렇다</span>
-                        <span>전혀 아니다</span>
+                    <div class="options-container">
+                        <span class="label-text">매우 그렇다</span>
+                        <div class="options">
+                            <label class="radio-container"><input type="radio" name="joy" value="5"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="joy" value="4"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="joy" value="3"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="joy" value="2"><span class="radio-mark"></span></label>
+                            <label class="radio-container"><input type="radio" name="joy" value="1"><span class="radio-mark"></span></label>
+                        </div>
+                        <span class="label-text">전혀 아니다</span>
                     </div>
                 </div>
-                <!-- 추가 질문들도 동일한 방식으로 구성 -->
-                <br><br>
+
                 <!-- 다음 페이지 버튼 -->
                 <button type="button" onclick="submitTest()">다음 페이지</button>
             </div>
