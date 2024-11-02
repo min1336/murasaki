@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         /* 추가 스타일 */
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
         .question {
             text-align: center;
             margin-bottom: 30px;
@@ -74,15 +82,15 @@
         /* 진행바 스타일 */
         #progress-bar-container {
             position: relative;
-            width: 80%; /* 화면을 꽉 채우지 않고, 적당히 중앙에 위치 */
-            height: 30px; /* 진행바 높이를 약간 키움 */
+            width: 80%;
+            height: 30px;
             background-color: #e0e0e0;
             border-radius: 20px;
-            margin: 20px auto; /* 화면 가운데 정렬 */
+            margin: 20px 0;
         }
 
         #progress-bar {
-            width: 30%; /* 현재 진행된 부분을 조정 */
+            width: 30%;
             height: 100%;
             background-color: #28a745;
             border-radius: 20px;
@@ -92,9 +100,9 @@
         /* 캐릭터 이미지 스타일 */
         .end-image {
             position: absolute;
-            top: -35px; /* 진행바 위로 더 많이 띄우기 */
-            right: -25px; /* 진행 상태의 끝에 위치시키기 */
-            width: 90px; /* 캐릭터 이미지 크기를 더 키움 */
+            top: -50px; /* 진행바 위로 많이 띄움 */
+            right: -25px;
+            width: 120px; /* 캐릭터 이미지 크기를 더 키움 */
             height: auto;
         }
     </style>
