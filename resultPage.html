@@ -5,33 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <style>
         /* 차트의 크기를 조정하는 CSS */
-        #radarChart, #lineChart, #barChart {
+        #radarChart {
             width: 500px !important;
             height: 500px !important;
         }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        #result-display {
-            margin-bottom: 20px;
-        }
-        canvas {
-            display: block;
-            margin: 10px auto;
-        }
-        #qrcode {
-            text-align: center;
+
+        #home{
             margin-top: 20px;
-        }
-        button {
-            display: block;
-            margin: 20px auto;
             padding: 10px 20px;
+            font-size: 1em;
+            background-color: #00796b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -40,12 +29,7 @@
     <div id="result-display"></div>
     <div id="ranking-display"></div>
     <canvas id="radarChart" width="400" height="400"></canvas>
-
-    <button id="capture">결과 캡쳐 및 QR 코드 생성</button>
-    <div id="qrcode"></div>
-    
-    <!-- 홈 버튼 추가 -->
-    <button id="home">홈으로 돌아가기</button>
+    <button id="home" class="home">홈으로 돌아가기</button>
 
     <script>
         const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
@@ -62,10 +46,6 @@
             const totalScore = nextpageScoreValue + thirdpageScoreValue;
 
             totalScores.push({ scoreType: score, totalScore });
-
-            const scoreElement = document.createElement("p");
-            scoreElement.textContent = `${score} 점수: ${nextpageScoreValue} (nextpage) + ${thirdpageScoreValue} (thirdpage) = ${totalScore}`;
-            resultDisplay.appendChild(scoreElement);
 
             totalNextPageScore += nextpageScoreValue;
             totalThirdPageScore += thirdpageScoreValue;
@@ -96,8 +76,8 @@
                 datasets: [{
                     label: "Total Combined Scores",
                     data: chartData,
-                    backgroundColor: "rgba(75, 192, 192, 0.2)",
-                    borderColor: "rgba(75, 192, 192, 1)",
+                    backgroundColor: "rgba(124, 181, 103, 0.2)",
+                    borderColor: "rgba(132, 132, 132, 1)",
                     borderWidth: 1
                 }]
             },
@@ -105,30 +85,30 @@
                 scales: {
                     r: {
                         beginAtZero: true,
-                        max: 10
+                        max: 10,
+                        ticks: {
+                          display: false // 숫자 표시를 숨깁니다
+                        }
                     }
-                }
+                },
+                elements: {
+                    line: {
+                        tension: 0, // 선의 곡률 조정
+                        borderWidth: 2 // 선의 두께 설정
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false, // 범례 표시 여부
+                        position: 'top' // 범례 위치
+                    }
+                },
+                animation: {
+                    duration: 2000, // 애니메이션 지속 시간 (밀리초)
+                    easing: 'easeInOutQuad' // 애니메이션 효과
+                },
+                responsive: false // 화면 크기 조정
             }
-        });
-
-        // 캡쳐 및 QR 코드 생성 버튼 클릭 이벤트
-        document.getElementById('capture').addEventListener('click', function() {
-            html2canvas(document.body).then(function(canvas) {
-                // 캔버스를 이미지로 변환
-                var imgData = canvas.toDataURL('image/png');
-
-                // 새 창에 캡처 이미지 표시
-                var newWindow = window.open();
-                newWindow.document.write('<img src="' + imgData + '" style="width:100%;">');
-
-                // QR 코드 생성
-                $('#qrcode').empty(); // 기존 QR 코드 제거
-                $('#qrcode').qrcode({
-                    text: imgData,
-                    width: 200,
-                    height: 200
-                });
-            });
         });
 
         // 홈 버튼 클릭 이벤트

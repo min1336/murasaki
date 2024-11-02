@@ -4,156 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행복축제 - MBTI 테스트</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 로딩 바 스타일 */
-        .progress-bar-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%; /* 전체 화면 너비 */
-            background-color: #f0f0f0;
-            padding: 10px 0; /* 패딩 설정 */
-            z-index: 1000;
-        }
-        .progress-bar {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            position: relative;
-            width: 100%; /* 전체 화면 너비 */
-        }
-        .progress-bar .step {
-            flex-grow: 1; /* 각 칸이 동일한 비율로 성장하도록 설정 */
-            height: 50px; /* 높이를 설정 */
-            background-color: #d3d3d3;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-        }
-        .progress-bar .step.active {
-            background-color: #4a8a4d;
-        }
-
-        /* 고정된 캐릭터 이미지 */
-        .character {
-            position: absolute;
-            top: -20px; /* 위로 튀어나오게 조정 */
-            width: 80px; /* 캐릭터 너비 조정 */
-            height: 80px; /* 캐릭터 높이 조정 */
-            background-image: url('https://github.com/min1336/murasaki/blob/main/runningcat.png?raw=true');
-            background-size: contain; /* 캐릭터를 비율에 맞게 조정 */
-            background-repeat: no-repeat; /* 반복하지 않도록 설정 */
-            background-position: center; /* 이미지 중앙 정렬 */
-            left: 50%; /* 가운데 정렬 */
-            transform: translateX(-50%); /* 가운데 정렬 조정 */
-        }
-
-        .container {
-            margin-top: 80px; /* 진행바의 높이를 고려한 margin-top 설정 */
-            padding: 20px;
-        }
-        h1 {
-            color: #4a8a4d;
-        }
-        .question {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .options {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 10px 0;
-        }
-        .radio-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 1.1em;
-            color: #333;
-            transition: color 0.3s ease;
-        }
-        .radio-container input[type="radio"] {
-            display: none;
-        }
-        .radio-mark {
-            height: 20px;
-            width: 20px;
-            background-color: #f0f8ff;
-            border: 2px solid #4a8a4d;
-            border-radius: 50%;
-            margin-right: 10px;
-            position: relative;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        .radio-container input[type="radio"]:checked + .radio-mark {
-            background-color: #4a8a4d;
-            border-color: #4a8a4d;
-            animation: pulse 0.5s ease;
-        }
-        .radio-container input[type="radio"]:checked + .radio-mark::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .radio-container:hover .radio-mark {
-            border-color: #37683a;
-            background-color: #4a8a4d53;
-        }
-        button {
-            background-color: #4a8a4d;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #37683a;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.5); }
-            100% { transform: scale(1); }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 진행 바 -->
-    <div class="progress-bar-container">
-        <div class="progress-bar">
-            <div class="step active">
-                <!-- 첫 번째 칸 -->
-            </div>
-            <div class="step"></div> <!-- 두 번째 칸 -->
-            <div class="character"></div> <!-- 첫 번째 칸과 두 번째 칸 사이에 캐릭터 이미지 -->
-            <div class="step"></div>
-            <div class="step"></div>
-            <div class="step"></div>
-        </div>
-    </div>
-
     <form>
+        <div id="progress-bar-container">
+            <div class="progress-bar filled"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+        </div>
         <div class="container">
             <h1>성령의 9가지 열매 찾기</h1>
             <div id="quiz">
                 <!-- 질문 항목들 -->
+                 <br><br>
                 <div class="question">
                     <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
                     <div class="options">
@@ -164,9 +31,97 @@
                         <label class="radio-container"><input type="radio" name="love" value="1"><span class="radio-mark"></span>전혀 아니다</label>
                     </div>
                 </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="joy" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="joy" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="peace" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="peace" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="patience" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="patience" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="kindness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="kindness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="goodness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="goodness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="faithfulness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="gentleness" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="gentleness" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
+                <div class="question">
+                    <h4>함께 사는 사람이 늦은 시간까지 집에 들어오지 않으면, 먼저 잠들지 못한다.</h4>
+                    <div class="options">
+                        <label class="radio-container"><input type="radio" name="selfControl" value="5"><span class="radio-mark"></span>매우 그렇다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="4"><span class="radio-mark"></span>그렇다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="3"><span class="radio-mark"></span>보통이다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="2"><span class="radio-mark"></span>아니다</label>
+                        <label class="radio-container"><input type="radio" name="selfControl" value="1"><span class="radio-mark"></span>전혀 아니다</label>
+                    </div>
+                </div>
+                <br><br>
                 
-                <!-- 추가 질문 및 진행바 코드 생략 -->
-                
+                <!-- 다음 페이지 버튼 -->
                 <button type="button" onclick="submitTest()">다음 페이지</button>
             </div>
         </div>
