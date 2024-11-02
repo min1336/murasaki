@@ -75,8 +75,10 @@
             border-color: #6f42c1;
         }
 
+        /* 텍스트 크기 조정 */
         .label-text {
-            font-size: 14px;
+            font-size: 16px; /* 텍스트 크기를 키움 */
+            font-weight: bold; /* 텍스트를 두껍게 */
         }
 
         /* 진행바 스타일 */
@@ -159,10 +161,10 @@
             const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
             for (const score of scores) {
                 const answer = document.querySelector(`input[name="${score}"]:checked`);
-                //if (!answer) {
-                    //alert('모든 질문에 답해주세요!');
-                    //return;
-                //}
+                if (!answer) {
+                    alert('모든 질문에 답해주세요!');
+                    return;
+                }
                 sessionStorage.setItem(`nextpage_${score}Score`, answer.value);
             }
             window.location.href = "thirdpage.html";
