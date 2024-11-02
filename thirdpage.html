@@ -164,9 +164,9 @@
             const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
             for (const score of scores) {
                 const answer = document.querySelector(`input[name="${score}"]:checked`);
-                //if (!answer) {
-                    //alert('모든 질문에 답해주세요!');
-                    //return;
+                if (!answer) {
+                    alert('모든 질문에 답해주세요!');
+                    return;
                 }
                 sessionStorage.setItem(`thirdpage_${score}Score`, answer.value);
             }
