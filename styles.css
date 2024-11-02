@@ -4,8 +4,8 @@
     top: 5vh; /* 화면 상단에서의 거리 */
     left: 50%; /* 화면의 중앙 위치 */
     transform: translateX(-50%); /* 중앙으로 이동 */
-    width: 90%; /* 진행 바 컨테이너의 너비 */
-    height: 30px;
+    width: 50%; /* 진행 바 컨테이너의 너비 */
+    height: 40px;
     background-color: #E0E0E0; /* 배경색 */
     z-index: 1000;
     border: 1px solid #E0E0E0; /* 전체 바의 경계 */
