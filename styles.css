@@ -20,12 +20,12 @@
 }
 
 .end-image {
-    position: relative; /* 진행 바의 끝에 고정 */
-    top: 50%; /* 세로 중앙 맞춤 */
-    right: -50px; /* 진행 바의 오른쪽 끝에 위치 조정 (필요에 따라 조정) */
-    width: 45%; /* 이미지의 크기 조정 (필요에 따라 조정) */
-    height: auto; /* 비율 유지 */
-    transform: translateY(-50%); /* 세로 중앙 맞춤 */
+    position: absolute; /* 진행 바의 끝에 고정 */
+    top: 0; /* 진행 바의 상단에 맞춤 */
+    right: -15px; /* 진행 바의 오른쪽 끝에 위치 조정 (필요에 따라 조정) */
+    width: 50px; /* 이미지의 크기 조정 (진행 바 높이에 맞게 조정) */
+    height: 100%; /* 진행 바와 동일한 높이 */
+    object-fit: contain; /* 이미지 비율 유지 */
 }
 
 
