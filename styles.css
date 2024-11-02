@@ -1,21 +1,22 @@
 /* styles.css */
-
 #progress-bar-container {
-    display: flex;
-    justify-content: space-around; /* 바를 고르게 배치 */
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px; /* 진행 바의 높이 */
-    background-color: #E0E0E0; /* 바탕색 */
-    z-index: 1000; /* 상단에 고정 */
+    top: 5vh; /* 화면 상단에서의 거리 */
+    left: 50%; /* 화면의 중앙 위치 */
+    transform: translateX(-50%); /* 중앙으로 이동 */
+    width: 90%; /* 진행 바 컨테이너의 너비 */
+    height: 30px;
+    background-color: #E0E0E0; /* 배경색 */
+    z-index: 1000;
+    border: 1px solid #E0E0E0; /* 전체 바의 경계 */
+    border-radius: 100px; /* 모서리를 둥글게 */
 }
 
-.progress-bar {
-    flex: 1; /* 각 바가 균등하게 늘어나도록 설정 */
-    background-color: #E0E0E0;
-    border: 6px solid #E0E0E0; /* 바의 경계 */
+#progress-bar {
+    height: 100%; /* 전체 높이 맞춤 */
+    background-color: #7CB567; /* 채워진 색상 */
+    border-radius: 100px; /* 모서리를 둥글게 */
+    transition: width 0.3s ease; /* 너비 변화 시 부드러운 전환 */
 }
 
 .progress-bar.filled {
