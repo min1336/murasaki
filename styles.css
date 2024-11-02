@@ -1,6 +1,6 @@
 /* styles.css */
 #progress-bar-container {
-    position: fixed;
+    position: relative;
     top: 5vh; /* 화면 상단에서의 거리 */
     left: 50%; /* 화면의 중앙 위치 */
     transform: translateX(-50%); /* 중앙으로 이동 */
