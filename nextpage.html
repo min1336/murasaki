@@ -115,6 +115,27 @@
             padding: 15px 25px; /* 버튼 패딩 증가 */
             cursor: pointer;
         }
+        /* 점수에 따른 색상 적용 */
+        .radio-container input[type="radio"]:checked + .radio-mark {
+            animation: pulse 0.5s ease;
+        }
+
+        .radio-container input[type="radio"][value="5"]:checked + .radio-mark,
+        .radio-container input[type="radio"][value="4"]:checked + .radio-mark {
+            background-color: #28a745; /* 초록색 */
+            border-color: #28a745;
+        }
+
+        .radio-container input[type="radio"][value="3"]:checked + .radio-mark {
+            background-color: #6c757d; /* 회색 */
+            border-color: #6c757d;
+        }
+
+        .radio-container input[type="radio"][value="2"]:checked + .radio-mark,
+        .radio-container input[type="radio"][value="1"]:checked + .radio-mark {
+            background-color: #6f42c1; /* 보라색 */
+            border-color: #6f42c1;
+        }
     </style>
 </head>
 <body>
