@@ -5,33 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <style>
         /* 차트의 크기를 조정하는 CSS */
-        #radarChart, #lineChart, #barChart {
+        #radarChart {
             width: 500px !important;
             height: 500px !important;
         }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        #result-display {
-            margin-bottom: 20px;
-        }
-        canvas {
-            display: block;
-            margin: 10px auto;
-        }
-        #qrcode {
+        /* 스타일 정의 */
+        .capture-area {
+            width: 300px;
+            height: 200px;
+            background-color: #e0f7fa;
             text-align: center;
-            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #00838f;
         }
-        button {
-            display: block;
-            margin: 20px auto;
+
+        .capture-button {
+            margin-top: 20px;
             padding: 10px 20px;
+            font-size: 1em;
+            background-color: #00796b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .capture-button:hover {
+            background-color: #004d40;
+        }
+
+        #qrcode {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -41,7 +50,17 @@
     <div id="ranking-display"></div>
     <canvas id="radarChart" width="400" height="400"></canvas>
 
-    <button id="capture">결과 캡쳐 및 QR 코드 생성</button>
+    <!-- 캡처할 영역 -->
+    <div class="capture-area" id="captureArea">
+        <h2>캡처할 영역</h2>
+        <p>이 부분이 캡처되어 QR 코드로 변환됩니다.</p>
+    </div>
+
+    <!-- 캡처 버튼 -->
+    <button class="capture-button" onclick="captureArea()">캡처하기</button>
+
+    <!-- QR 코드 생성 영역 -->
+    <h2>QR 코드</h2>
     <div id="qrcode"></div>
 
     <script>
@@ -107,25 +126,29 @@
                 }
             }
         });
-        // 캡쳐 및 QR 코드 생성 버튼 클릭 이벤트
-        document.getElementById('capture').addEventListener('click', function() {
-            html2canvas(document.body).then(function(canvas) {
-                // 캔버스를 이미지로 변환
-                var imgData = canvas.toDataURL('image/png');
 
-                // 새 창에 캡처 이미지 표시
-                var newWindow = window.open();
-                newWindow.document.write('<img src="' + imgData + '" style="width:100%;">');
+        function captureArea() {
+            // 캡처할 영역 요소 가져오기
+            const captureElement = document.getElementById("captureArea");
+
+            // html2canvas을 사용해 해당 요소 캡처
+            html2canvas(captureElement).then(canvas => {
+                // 캡처된 내용을 이미지 데이터로 변환
+                const imageData = canvas.toDataURL("image/png");
 
                 // QR 코드 생성
-                $('#qrcode').empty(); // 기존 QR 코드 제거
-                $('#qrcode').qrcode({
-                    text: imgData,
-                    width: 200,
-                    height: 200
-                });
+                generateQRCode(imageData);
             });
-        });
+        }
+
+        function generateQRCode(imageData) {
+            $('#qrcode').empty(); // 기존 QR 코드 제거
+            $('#qrcode').qrcode({
+                text: imageData,
+                width: 256, // 크기를 늘려 스캔을 쉽게 만듭니다.
+                height: 256
+            });
+        }
     </script>
 </body>
 </html>
