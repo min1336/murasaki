@@ -30,6 +30,9 @@
             height: auto;
             margin-top: 20px;
         }
+        body{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -43,8 +46,8 @@
             <td colspan="2" rowspan="6">
                 <canvas id="radarChart" width="250" height="250"></canvas>
             </td>
-            <td>이미지</td>
-            <td>이미지</td>
+            <td id="rank-2"></td>
+            <td id="rank-3"></td>
         </tr>
         <tr>
             <td>
@@ -52,25 +55,14 @@
                     <img id="winner-image" src="#" alt="Selected winner image">
                 </div>
             </td>
-            <td>3</td>
-            <td>4</td>
+            <td id="rank-4"></td>
+            <td id="rank-5"></td>
         </tr>
         <tr>
             <td rowspan="4", style="text-align:center">
                 <h1 id="selected-winner" style="display: none;"></h1>
                 <p id="winner-description"></p> <!-- 설명을 출력할 요소 추가 -->
             </td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>6</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>8</td>
-        </tr>
-        <tr>
-            <td colspan="2">글</td>
         </tr>
     </table>
     <button id="home" class="home">홈으로 돌아가기</button>
