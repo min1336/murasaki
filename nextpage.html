@@ -123,6 +123,22 @@
         </div>
     </form>
     <script>
+        const progressBar = document.getElementById('progress-bar');
+        const endImage = document.getElementById('end-image');
+
+        function updateProgressBar(widthPercentage) {
+            progressBar.style.width = `${widthPercentage}%`;
+
+            // 이미지 변경 로직
+            if (widthPercentage < 50) {
+                endImage.src = 'https://github.com/min1336/murasaki/blob/main/runningcat.png?raw=true'; // 첫 번째 이미지
+            } else {
+                endImage.src = 'https://github.com/min1336/murasaki/blob/main/runningcat2.png?raw=true'; // 두 번째 이미지
+            }
+        }
+
+        // 예시: 진행 바를 100%로 업데이트 (여기서는 예시로 직접 호출)
+        updateProgressBar(16); // 원하는 진행 바의 퍼센트를 여기에 설정
         function submitTest() {
             const scores = ['love', 'joy', 'peace', 'patience', 'kindness', 'goodness', 'faithfulness', 'gentleness', 'selfControl'];
             for (const score of scores) {
