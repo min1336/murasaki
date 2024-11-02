@@ -5,6 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행복축제 - MBTI 테스트</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 추가 스타일 */
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .options-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .radio-container {
+            position: relative;
+            padding: 0 8px;
+        }
+
+        /* 동그라미 크기 및 색상 설정 */
+        .radio-mark {
+            display: inline-block;
+            border-radius: 50%;
+            border: 2px solid;
+        }
+
+        /* 개별 동그라미의 크기 및 색상 설정 */
+        .radio-container:nth-child(1) .radio-mark {
+            width: 35px;
+            height: 35px;
+            border-color: #28a745;
+        }
+
+        .radio-container:nth-child(2) .radio-mark {
+            width: 28px;
+            height: 28px;
+            border-color: #28a745;
+        }
+
+        .radio-container:nth-child(3) .radio-mark {
+            width: 18px;
+            height: 18px;
+            border-color: #6c757d;
+        }
+
+        .radio-container:nth-child(4) .radio-mark {
+            width: 28px;
+            height: 28px;
+            border-color: #6f42c1;
+        }
+
+        .radio-container:nth-child(5) .radio-mark {
+            width: 35px;
+            height: 35px;
+            border-color: #6f42c1;
+        }
+
+        /* 텍스트 크기 조정 */
+        .label-text {
+            font-size: 16px; /* 텍스트 크기를 키움 */
+            font-weight: normal; /* 텍스트를 얇게 설정 */
+        }
+
+        /* 진행바 스타일 */
+        #progress-bar-container {
+            position: relative;
+            width: 80%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        #progress-bar {
+            width: 30%;
+            height: 100%;
+            background-color: #28a745;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        /* 캐릭터 이미지 스타일 */
+        .end-image {
+            position: absolute;
+            top: -50px; /* 진행바 위로 띄움 */
+            right: 0; /* 진행바의 맨 끝에 위치 */
+            transform: translateX(50%); /* 이미지가 바 끝에 걸쳐 있도록 조정 */
+            width: 120px; /* 캐릭터 이미지 크기를 더 키움 */
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <form>

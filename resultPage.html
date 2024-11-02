@@ -8,8 +8,8 @@
     <style>
         /* 차트의 크기를 조정하는 CSS */
         #radarChart {
-            width: 500px !important;
-            height: 500px !important;
+            width: 400px !important;
+            height: 400px !important;
         }
 
         #home{
@@ -38,7 +38,7 @@
                 </div>
             </td>
             <td>
-                <canvas id="radarChart" width="400" height="400"></canvas>
+                <canvas id="radarChart" width="250" height="250"></canvas>
             </td>
         </tr>
         <tr>
@@ -130,6 +130,20 @@
                         max: 10,
                         ticks: {
                           display: false // 숫자 표시를 숨깁니다
+                        },
+                        pointLabels: {
+                            color: "black", // 변수명(레이블) 색상을 검은색으로 설정
+                            font: {
+                            size: 10 // 레이블 글씨 크기 조정 (옵션)
+                            }
+                        },
+                        grid: {
+                            circular: false, // 원형 외곽선을 표시
+                            color: (context) => context.index === context.chart.scales.r.ticks.length - 1 ? 'green' : 'lightgray' // 마지막 외곽선은 파란색, 내부 선은 회색
+                        },
+                        angleLines: {
+                            color: "lightgray", // 세로선 색상을 빨간색으로 설정
+                            lineWidth: 0.5 // 세로선 두께 설정
                         }
                     }
                 },
