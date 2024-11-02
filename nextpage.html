@@ -100,8 +100,9 @@
         /* 캐릭터 이미지 스타일 */
         .end-image {
             position: absolute;
-            top: -50px; /* 진행바 위로 많이 띄움 */
-            right: -25px;
+            top: -50px; /* 진행바 위로 띄움 */
+            right: 0; /* 진행바의 맨 끝에 위치 */
+            transform: translateX(50%); /* 이미지가 바 끝에 걸쳐 있도록 조정 */
             width: 120px; /* 캐릭터 이미지 크기를 더 키움 */
             height: auto;
         }
