@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -11,9 +12,9 @@
             flex-direction: column; /* 세로 방향으로 정렬 */
             justify-content: center; /* 수직 중앙 정렬 */
             align-items: center; /* 수평 중앙 정렬 */
+            text-align: center;
             height: 100vh; /* 전체 높이를 뷰포트 높이에 맞춤 */
             margin: 0; /* 기본 여백 제거 */
-            text-align: center; /* 텍스트 중앙 정렬 */
             background-color: #f9f9f9; /* 배경 색상 (선택사항) */
         }
     
@@ -54,7 +55,10 @@
 <body>
     <table>
         <tr>
-            <td style="text-align:center">
+            <td>
+                <div class="image-container">
+                    <img id="winner-image" src="#" alt="Selected winner image" style="max-width: 100%; height: auto; margin-left: -30px;">
+                </div>
             </td>
             <td rowspan="2">
                 <canvas id="radarChart" width="250" height="250"></canvas>
@@ -62,26 +66,21 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <div class="image-container">
-                    <img id="winner-image" src="#" alt="Selected winner image" style="max-width: 100%; height: auto; margin-left: -30px;">
-                </div>
-            </td>
-            
-        </tr>
-        <tr>
-            <td rowspan="4" style="text-align:center">
+            <td style="text-align:center">
                 <h1 id="selected-winner" style="display: none;"></h1>
                 <p id="winner-description"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="home" class="home">홈으로 돌아가기</button>
             </td>
             <td height ="20", style="text-align:center">
                 <img id="QR" class="qr-image" src="#" style="max-width: 80px; height: 80px;"><br>
                 <span style="color: gray;">당신의 주 열매에 대한 상세한 설명이 궁금하시다면 <br> 다음의 QR코드를 확인해주세요. <br> (위의 그래프는 QR코드에 없습니다.)</span>
             </td>
         </tr>
-    </table>    
-    <br><br><br>
-    <button id="home" class="home">홈으로 돌아가기</button>
+    </table>
 
     <script>
         const selectedWinner = sessionStorage.getItem("selectedWinner") || sessionStorage.getItem("highestScore") || "선택된 항목이 없습니다.";
