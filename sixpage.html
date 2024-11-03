@@ -25,16 +25,17 @@
         background-color: #7CB567; /* 채워진 색상 */
         border-radius: 100px; /* 모서리를 둥글게 */
         position: relative; /* 이미지 위치 조정을 위한 상대 위치 설정 */
-        width: 84%; /* 진행 상태의 너비 */
     }
 
     .end-image {
         position: absolute;
-        top: -60px; /* 이미지가 진행 바 위로 겹치도록 조정 */
-        right: -20px; /* 진행 바의 끝에 맞추기 */
-        width: 120px; /* 이미지 크기 */
+        top: -60px; /* 이미지가 진행 바 위로 더 많이 겹치도록 조정 */
+        width: 120px; /* 이미지 크기를 키움 */
         height: auto;
         z-index: 1;
+    }
+    .progress-bar.filled {
+        background-color: #7CB567; /* 채워진 색상 */
     }
 </style>
 <body>
