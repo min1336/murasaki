@@ -6,6 +6,35 @@
     <title>행복축제 - MBTI 테스트</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    #progress-bar-container {
+            width: 80%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 0 auto;
+            position: relative;
+            margin-top: 20px;
+    }
+
+    #progress-bar {
+        height: 100%;
+        width: 16%;
+        background-color: #a4d4a4;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .end-image {
+        position: absolute;
+        top: -40px; /* 이미지가 진행 바 위로 얼마나 겹칠지 조정 */
+        right: -20px; /* 이미지가 진행 바 끝에 위치하도록 조정 */
+        width: 80px; /* 원하는 크기로 조정 */
+        height: auto;
+        z-index: 1;
+    }
+
+</style>
 <body>
     <form>
         <div id="progress-bar-container">
