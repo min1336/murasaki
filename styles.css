@@ -39,15 +39,15 @@
 
 
 button {
-    font-family: 'Arial', sans-serif; /* 원하는 글씨체를 여기에 지정하세요 */
-    background-color: #4a8a4d;
+    background-color: #7CB567;
     color: white;
-    padding: 10px 20px;
+    padding: 16px 29px;
     font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
+    border: 1;
+    border-radius: 15px;
     cursor: pointer;
     margin-top: 10px;
+    letter-spacing: 0.15em; /* 글자 간 간격 조절 */
 }
 button:hover {
     background-color: #37683a;
@@ -57,9 +57,6 @@ button:hover {
     50% { transform: scale(1.5); }
     100% { transform: scale(1); }
 }
-
-
-
 
 
 
