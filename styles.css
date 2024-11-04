@@ -35,7 +35,7 @@ button:hover {
 }
 
 body, html {
-    display: block;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     text-align: center;
