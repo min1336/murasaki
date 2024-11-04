@@ -129,24 +129,37 @@
             QR.src = "https://github.com/min1336/murasaki/blob/main/selfControlQR.png?raw=true";
         }
 
-        // Chart.js 설정
         const scores = ['사랑', '희락', '화평', '오래참음', '자비', '양선', '충성', '온유', '절제'];
         const totalScores = [];
         let totalNextPageScore = 0;
         let totalThirdPageScore = 0;
+        let totalFourPageScore = 0;
+        let totalFivePageScore = 0;
+        let totalSixPageScore = 0;
+        let totalSevenPageScore = 0;
 
         for (const score of scores) {
             const nextpageScoreValue = parseInt(sessionStorage.getItem(`nextpage_${score}Score`)) || 0;
             const thirdpageScoreValue = parseInt(sessionStorage.getItem(`thirdpage_${score}Score`)) || 0;
-            const totalScore = nextpageScoreValue + thirdpageScoreValue;
+            const fourpageScoreValue = parseInt(sessionStorage.getItem(`fourpage_${score}Score`)) || 0;
+            const fivepageScoreValue = parseInt(sessionStorage.getItem(`fivepage_${score}Score`)) || 0;
+            const sixpageScoreValue = parseInt(sessionStorage.getItem(`sixpage_${score}Score`)) || 0;
+            const sevenpageScoreValue = parseInt(sessionStorage.getItem(`sevenpage_${score}Score`)) || 0;
+
+            const totalScore = nextpageScoreValue + thirdpageScoreValue + fourpageScoreValue + fivepageScoreValue + sixpageScoreValue + sevenpageScoreValue;
 
             totalScores.push({ scoreType: score, totalScore });
+
             totalNextPageScore += nextpageScoreValue;
             totalThirdPageScore += thirdpageScoreValue;
+            totalFourPageScore += fourpageScoreValue;
+            totalFivePageScore += fivepageScoreValue;
+            totalSixPageScore += sixpageScoreValue;
+            totalSevenPageScore += sevenpageScoreValue;
         }
 
         const chartLabels = scores;
-        const chartData = totalScores.map(item => item.totalScore);
+        const chartData = totalScores.map(item => item.totalScore / 3);
 
         const ctx = document.getElementById("radarChart").getContext("2d");
         new Chart(ctx, {
