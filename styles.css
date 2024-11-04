@@ -78,7 +78,7 @@ h1, h2 {
 }
 /* 텍스트 크기 조정 */
 .label-text {
-    font-size: 20px;
+    font-size: 13px;
     font-weight: normal; /* 텍스트를 얇게 설정 */
 }
 
