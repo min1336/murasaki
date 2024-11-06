@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.7"/>
+    <link rel="stylesheet" href="styles.css">
     <title>행복의 열매따기</title>
     <style>
         /* 화면 중앙 정렬 */
@@ -70,12 +71,9 @@
         <!-- 선택 버튼 -->
         <button onclick="submitWinner()">선택 완료</button>
     </div>
-
     <script>
         // 공동우승 항목과 설명을 정의
         const jointWinners = JSON.parse(sessionStorage.getItem("jointWinners")) || [];
-
-        // 열매 이름을 키로, 설명을 값으로 하는 객체
         const descriptions = {
             "사랑": "사랑은 좋아하는 마음뿐 아니라, 상대의 행복을 위해 행동하는 것",
             "희락": "희락은 일상 중에 찾아온 작은 일이 하루를 환하게 만들어주는 것",
@@ -87,53 +85,50 @@
             "온유": "온유는 지혜롭고 부드럽게 타인을 포용하는 것",
             "절제": "절제는 외부의 유혹과 내적인 혼란 속에서도 쉽게 흔들리지 않는 것"
         };
-
+    
         const winnersList = document.getElementById("winners-list");
-
-        // 공동우승 항목을 테이블의 각 행으로 표시
-        if (jointWinners.length > 0) {
-            jointWinners.forEach((winner) => {
+    
+        if (winnersList) {
+            if (jointWinners.length > 0) {
+                jointWinners.forEach((winner) => {
+                    const row = document.createElement("tr");
+    
+                    const radioCell = document.createElement("td");
+                    radioCell.innerHTML = `<input type="radio" name="winner" value="${winner}">`;
+                    row.appendChild(radioCell);
+    
+                    const nameCell = document.createElement("td");
+                    nameCell.textContent = winner;
+                    row.appendChild(nameCell);
+    
+                    const descCell = document.createElement("td");
+                    descCell.textContent = descriptions[winner] || "설명이 없습니다.";
+                    row.appendChild(descCell);
+    
+                    winnersList.appendChild(row);
+                });
+            } else {
                 const row = document.createElement("tr");
-                
-                // 라디오 버튼 열
-                const radioCell = document.createElement("td");
-                radioCell.innerHTML = `<input type="radio" name="winner" value="${winner}">`;
-                row.appendChild(radioCell);
-                
-                // 이름 칸
-                const nameCell = document.createElement("td");
-                nameCell.textContent = winner;
-                row.appendChild(nameCell);
-                
-                // 설명 열 (객체에서 설명 가져오기)
-                const descCell = document.createElement("td");
-                descCell.textContent = descriptions[winner] || "설명이 없습니다.";
-                row.appendChild(descCell);
-                
-                // 테이블에 행 추가
+                const cell = document.createElement("td");
+                cell.colSpan = 3;
+                cell.textContent = "공동 우승 항목이 없습니다.";
+                row.appendChild(cell);
                 winnersList.appendChild(row);
-            });
-        } else {
-            const row = document.createElement("tr");
-            const cell = document.createElement("td");
-            cell.colSpan = 3;
-            cell.textContent = "공동 우승 항목이 없습니다.";
-            row.appendChild(cell);
-            winnersList.appendChild(row);
+            }
         }
-
+    
         // 선택한 항목을 sessionStorage에 저장하고 다음 페이지로 이동
         function submitWinner() {
             const selectedWinner = document.querySelector('input[name="winner"]:checked');
             if (selectedWinner) {
                 sessionStorage.setItem("selectedWinner", selectedWinner.value);
                 alert(`선택한 항목: ${selectedWinner.value}`);
-                // 다음 페이지로 이동 (예: resultPage.html)
                 window.location.href = "resultPage.html";
             } else {
                 alert("공동 우승 항목 중 하나를 선택해주세요.");
             }
         }
     </script>
+    
 </body>
 </html>
